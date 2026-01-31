@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Scan, Fingerprint, Lock, ShieldCheck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Scan, ShieldCheck } from 'lucide-react';
+import { events } from '../data/mockData';
+import Hero from '../components/Hero';
+import UpcomingEvents from '../components/UpcomingEvents';
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -10,41 +13,16 @@ const LandingPage = () => {
 
     const activateProtocol = () => {
         setShowHud(true);
-        // Sequence: 
-        // 0s: HUD Opens
-        // 1s: Scanning starts
-        // 3s: Access Granted
-        // 4s: Redirect
         setTimeout(() => setAuthStep(1), 1000);
         setTimeout(() => setAuthStep(2), 3500);
-        setTimeout(() => navigate('/login'), 5000);
+        setTimeout(() => navigate('/dashboard'), 5000); // Redirect to Dashboard on success!
     };
 
     return (
         <div className="landing-page">
-            <section className="hero">
-                <div className="hero-content">
-                    <h1 className="hero-title">
-                        Building <span className="highlight">problem-solvers</span>, <span className="highlight">developers</span>, and <span className="highlight">researchers</span>.
-                    </h1>
-                    <p className="hero-subtitle">
-                        Community of Developers and Coders
-                        <span
-                            className="stealth-trigger"
-                            onClick={activateProtocol}
-                        >
-                            (CoDeC)
-                        </span>{' '}
-                        is the premier technical club fostering innovation and technical excellence.
-                    </p>
-                    <div className="cta-group">
-                        <Link to="/events" className="btn btn-primary">
-                            View Events <ArrowRight size={18} />
-                        </Link>
-                        {/* Stealth mode active */}
-                    </div>
-                </div>
-            </section>
+            <Hero onActivateProtocol={activateProtocol} />
+
+            <UpcomingEvents events={events} />
 
             {showHud && (
                 <div className="ironman-overlay">

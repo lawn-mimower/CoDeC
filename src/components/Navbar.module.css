@@ -1,0 +1,123 @@
+.navbar {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 16px;
+    background: rgba(2, 6, 23, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.navbarScrolled {
+    background: rgba(2, 6, 23, 0.85);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: none;
+    letter-spacing: -0.05em;
+}
+
+.logoTextPrimary {
+    color: var(--secondary-glow);
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.logoTextSecondary {
+    color: var(--primary-glow);
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.menuIcon {
+    display: none;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.navMenu {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navLink {
+    position: relative;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.navLink:hover,
+.navLinkActive {
+    color: var(--text-primary);
+}
+
+.activeDot {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        top: 0;
+        width: 100%;
+        max-width: none;
+        border-radius: 0;
+        padding: 1rem 1.5rem;
+    }
+
+    .menuIcon {
+        display: block;
+    }
+
+    .navMenu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--bg-dark);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 4rem;
+        gap: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .navMenuActive {
+        transform: translateX(0%);
+    }
+}
