@@ -4,27 +4,60 @@ import { ArrowRight, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import styles from './Hero.module.css';
 
-const TAGLINE = 'Building problem-solvers, developers, and researchers.';
-const TYPING_SPEED_MS = 60;
+const TOKENS = [
+    { text: '<Building', type: 'syntaxKeyword' },
+    { text: ' ', type: 'syntaxPlain' },
+    { text: 'problem-solvers', type: 'syntaxEntity' },
+    { text: ' ', type: 'syntaxPlain' },
+    { text: 'developers', type: 'syntaxVariable' },
+    { text: ' ', type: 'syntaxPlain' },
+    { text: 'and', type: 'syntaxKeyword' },
+    { text: ' ', type: 'syntaxPlain' },
+    { text: 'researchers/>', type: 'syntaxString' },
+];
+
+const TYPING_SPEED_MS = 50;
 
 const TypewriterTagline = () => {
-    const [displayed, setDisplayed] = useState('');
+    const [completedTokens, setCompletedTokens] = useState([]);
+    const [currentTokenIndex, setCurrentTokenIndex] = useState(0);
+    const [currentTokenText, setCurrentTokenText] = useState('');
     const [done, setDone] = useState(false);
 
     useEffect(() => {
-        if (displayed.length >= TAGLINE.length) {
+        if (done) return;
+
+        if (currentTokenIndex >= TOKENS.length) {
             setDone(true);
             return;
         }
-        const t = setTimeout(() => {
-            setDisplayed(TAGLINE.slice(0, displayed.length + 1));
-        }, TYPING_SPEED_MS);
-        return () => clearTimeout(t);
-    }, [displayed]);
+
+        const targetToken = TOKENS[currentTokenIndex];
+
+        if (currentTokenText.length < targetToken.text.length) {
+            const timeout = setTimeout(() => {
+                setCurrentTokenText(targetToken.text.slice(0, currentTokenText.length + 1));
+            }, TYPING_SPEED_MS);
+            return () => clearTimeout(timeout);
+        } else {
+            // Token finished, move to next
+            const timeout = setTimeout(() => {
+                setCompletedTokens([...completedTokens, targetToken]);
+                setCurrentTokenIndex(currentTokenIndex + 1);
+                setCurrentTokenText('');
+            }, TYPING_SPEED_MS);
+            return () => clearTimeout(timeout);
+        }
+    }, [currentTokenIndex, currentTokenText, completedTokens, done]);
 
     return (
         <span className={styles.tagline}>
-            {displayed}
+            {completedTokens.map((token, index) => (
+                <span key={index} className={styles[token.type]}>{token.text}</span>
+            ))}
+            <span className={styles[TOKENS[currentTokenIndex]?.type || 'syntaxPlain']}>
+                {currentTokenText}
+            </span>
             {!done && <span className={styles.cursor} />}
         </span>
     );

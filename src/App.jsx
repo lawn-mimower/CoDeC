@@ -8,6 +8,7 @@ import AchievementsPage from './pages/AchievementsPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import ClubHeadsPage from './pages/ClubHeadsPage';
+import NexusPage from './pages/NexusPage';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/events" element={<EventsPage />} />
                         <Route path="/achievements" element={<AchievementsPage />} />
                         <Route path="/login" element={<LoginPage />} />
+                        <Route path="/connect" element={<NexusPage />} />
                         <Route path="/dashboard" element={<Dashboard />} />
                     </Routes>
                 </main>

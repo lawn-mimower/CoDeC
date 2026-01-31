@@ -32,7 +32,7 @@ const UpcomingEvents = ({ events }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
             >
-                Upcoming Operations
+                Upcoming Events
             </motion.h2>
 
             {upcoming.length > 0 ? (

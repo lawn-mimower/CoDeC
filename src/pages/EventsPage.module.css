@@ -1,5 +1,5 @@
 .pageContainer {
-    padding: 6rem 2rem;
+    padding: 8rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
@@ -19,7 +19,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
 }
 
 .subtitle {

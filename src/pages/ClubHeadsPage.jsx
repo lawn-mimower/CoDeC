@@ -5,6 +5,11 @@ import './ClubHeadsPage.css';
 const ClubHeadsPage = () => {
     return (
         <div className="page-container">
+            <div className="background">
+                <div className="grid"></div>
+                <div className="glowOrb"></div>
+            </div>
+
             <div className="section-header">
                 <h1>Club Heads</h1>
                 <p>Meet the leaders driving innovation at CoDeC.</p>
