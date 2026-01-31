@@ -1,48 +1,122 @@
-/* Existing Styles */
+/* ===== Landing Page – Dark Cyberpunk / Futuristic ===== */
+/* Uses --primary-color (#2563eb) and --accent-color (#f59e0b) from index.css */
+
+.landing-page--dark {
+    --lp-bg: #0a0e17;
+    --lp-bg-elevated: #0f1623;
+    --lp-surface: rgba(15, 23, 42, 0.6);
+    --lp-border: rgba(37, 99, 235, 0.25);
+    --lp-glow-blue: rgba(37, 99, 235, 0.5);
+    --lp-glow-orange: rgba(245, 158, 11, 0.5);
+    --lp-text: #e2e8f0;
+    --lp-text-muted: #94a3b8;
+    --lp-primary: #2563eb;
+    --lp-accent: #f59e0b;
+}
+
 .landing-page {
     width: 100%;
     min-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
+    background: var(--lp-bg);
+    color: var(--lp-text);
 }
 
+/* ----- Hero ----- */
 .hero {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 4rem 2rem;
-    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1) 0%, rgba(248, 250, 252, 0) 70%);
+    padding: 5rem 2rem 8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Centered radial glow directly behind headline (orange + blue blend) */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            ellipse 70% 60% at 50% 50%,
+            var(--lp-glow-blue) 0%,
+            var(--lp-glow-orange) 25%,
+            transparent 60%
+        ),
+        linear-gradient(180deg, transparent 0%, var(--lp-bg) 100%);
+    pointer-events: none;
+}
+
+/* Grid pattern overlay – technical/developer vibe */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: clamp(2.25rem, 5vw, 4rem);
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.15;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    min-height: 1.2em;
 }
 
-.highlight {
-    color: var(--primary-color);
-    position: relative;
+.typewriter-text {
+    display: inline;
+    color: var(--lp-text);
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    color: var(--lp-accent);
+    font-weight: 300;
+    animation: cursor-blink 0.8s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes cursor-blink {
+    50% {
+        opacity: 0;
+    }
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
-    color: #64748b;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--lp-text-muted);
     margin-bottom: 2.5rem;
-    line-height: 1.6;
+    line-height: 1.7;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .stealth-trigger {
-    cursor: default;
+    cursor: pointer;
     user-select: none;
+    color: var(--lp-accent);
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.stealth-trigger:hover {
+    color: #fbbf24;
+    text-shadow: 0 0 12px var(--lp-glow-orange);
 }
 
 .cta-group {
@@ -52,44 +126,149 @@
 }
 
 .btn {
-    padding: 12px 28px;
-    border-radius: 8px;
+    padding: 14px 28px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
+    transition: all 0.25s ease;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-    border: 2px solid var(--primary-color);
+    background: linear-gradient(135deg, var(--lp-primary) 0%, #1d4ed8 100%);
+    color: #fff;
+    border: 1px solid rgba(37, 99, 235, 0.5);
+    box-shadow: 0 0 20px var(--lp-glow-blue);
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
-    border-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px var(--lp-glow-blue);
+}
+
+/* ----- Upcoming Events ----- */
+.upcoming-events {
+    padding: 6rem 2rem 5rem;
+    position: relative;
+}
+
+.upcoming-events::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--lp-border), transparent);
+    opacity: 0.6;
+}
+
+.section-title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.02em;
+    color: var(--lp-text);
+    text-shadow: 0 0 30px var(--lp-glow-blue);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.event-card {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--lp-accent);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(245, 158, 11, 0.2);
+}
+
+.event-card:nth-child(2):hover {
+    border-color: var(--lp-primary);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+.event-card-inner {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.event-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.event-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.event-date svg {
+    flex-shrink: 0;
+}
+
+.event-desc {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* Outline button that fills on hover */
+.event-register {
+    margin-top: 0.5rem;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--lp-accent);
+    border: 2px solid var(--lp-accent);
+    border-radius: 8px;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.event-register:hover {
+    background: var(--lp-accent);
+    color: #0a0e17;
     transform: translateY(-2px);
 }
 
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-color);
-    border: 2px solid #e2e8f0;
+.events-empty {
+    text-align: center;
+    color: var(--lp-text-muted);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.btn-secondary:hover {
-    border-color: var(--text-color);
-    transform: translateY(-2px);
-}
-
+/* ----- Responsive ----- */
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
+    .hero {
+        padding: 3rem 1.5rem 4rem;
     }
 
     .cta-group {
@@ -100,9 +279,17 @@
         width: 100%;
         justify-content: center;
     }
+
+    .upcoming-events {
+        padding: 4rem 1.5rem 4rem;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* Ironman HUD Overlay */
+/* ===== HUD Overlay (Easter Egg) – unchanged behavior ===== */
 .ironman-overlay {
     position: fixed;
     top: 0;
@@ -214,7 +401,6 @@
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
@@ -224,7 +410,6 @@
     from {
         transform: rotate(360deg);
     }
-
     to {
         transform: rotate(0deg);
     }
@@ -241,12 +426,10 @@
         transform: scale(1);
         opacity: 1;
     }
-
     50% {
         transform: scale(1.1);
         opacity: 0.8;
     }
-
     100% {
         transform: scale(1);
         opacity: 1;
@@ -258,11 +441,9 @@
         top: 0%;
         opacity: 0;
     }
-
     50% {
         opacity: 1;
     }
-
     100% {
         top: 100%;
         opacity: 0;
