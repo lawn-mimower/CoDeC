@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Scan, ShieldCheck } from 'lucide-react';
-import { events } from '../data/mockData';
+import { EventManager } from '../utils/EventManager';
 import Hero from '../components/Hero';
 import UpcomingEvents from '../components/UpcomingEvents';
 import './LandingPage.css';
@@ -9,7 +9,14 @@ import './LandingPage.css';
 const LandingPage = () => {
     const [showHud, setShowHud] = useState(false);
     const [authStep, setAuthStep] = useState(0); // 0: Init, 1: Scanning, 2: Access Granted
+    const [eventsData, setEventsData] = useState({ upcoming: [] });
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Hydrate events from local storage/mock
+        setEventsData(EventManager.getEvents());
+    }, []);
 
     const activateProtocol = () => {
         setShowHud(true);
@@ -22,7 +29,7 @@ const LandingPage = () => {
         <div className="landing-page">
             <Hero onActivateProtocol={activateProtocol} />
 
-            <UpcomingEvents events={events} />
+            <UpcomingEvents events={eventsData} />
 
             {showHud && (
                 <div className="ironman-overlay">
