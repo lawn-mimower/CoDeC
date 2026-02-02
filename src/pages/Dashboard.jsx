@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, Award, Users, MessageSquare, Calendar, Plus, Trophy, TrendingUp, Zap } from 'lucide-react';
+import { LayoutDashboard, Award, Users, MessageSquare, Calendar, Plus, Trophy, TrendingUp, Zap, Radio, Repeat } from 'lucide-react';
 import { currentUser } from '../data/mockData';
+import { EventManager } from '../utils/EventManager';
+import { useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
@@ -28,6 +30,12 @@ const Dashboard = () => {
                         <Award size={20} /> Combat Log
                     </button>
                     <button
+                        className={`${styles.navBtn} ${activeTab === 'manage-events' ? styles.activeTab : ''}`}
+                        onClick={() => setActiveTab('manage-events')}
+                    >
+                        <Radio size={20} /> Manage Events
+                    </button>
+                    <button
                         className={`${styles.navBtn} ${activeTab === 'meetings' ? styles.activeTab : ''}`}
                         onClick={() => setActiveTab('meetings')}
                     >
@@ -50,6 +58,7 @@ const Dashboard = () => {
 
             <main className={styles.content}>
                 {activeTab === 'tracker' && <ContestTracker />}
+                {activeTab === 'manage-events' && <EventArchitect />}
                 {activeTab === 'meetings' && <MeetingUpdates />}
                 {activeTab === 'announcements' && <Announcements />}
                 {activeTab === 'discussions' && <Discussions />}
@@ -233,5 +242,195 @@ const Discussions = () => (
         </div>
     </div>
 );
+
+
+
+const EventArchitect = () => {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        name: '',
+        date: '',
+        time: '',
+        isAllDay: false,
+        recurrence: 'none',
+        venue: '',
+        category: 'cp',
+        description: '',
+        registrationLink: ''
+    });
+
+    const handleChange = (e) => {
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        setFormData({ ...formData, [e.target.name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Basic Validation
+        if (!formData.name || !formData.date) {
+            alert('Protocol Failed: Name and Date are required.');
+            return;
+        }
+
+        // Save Event
+        EventManager.addEvent(formData);
+
+        // Visual Feedback
+        const btn = document.getElementById('publishBtn');
+        if (btn) {
+            btn.innerHTML = "UPLINK ESTABLISHED...";
+            btn.style.background = "#4ade80";
+        }
+
+        setTimeout(() => {
+            alert("Event Uplink Established: Data successfully patched to the network.");
+            navigate('/events');
+        }, 800);
+    };
+
+    return (
+        <div>
+            <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>
+                    <Radio size={28} className="text-pink-500 animate-pulse" />
+                    Event Architect
+                </h2>
+            </div>
+
+            <form className={styles.architectForm} onSubmit={handleSubmit}>
+                <div className={styles.architectFormGroup}>
+                    <label className={styles.architectLabel}>Operation Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        className={styles.neonInput}
+                        placeholder="e.g. Cyberpunk Hackathon 2077"
+                        value={formData.name}
+                        onChange={handleChange}
+                        autoFocus
+                    />
+                </div>
+
+                <div className={styles.row}>
+                    <div className={styles.architectFormGroup}>
+                        <label className={styles.architectLabel}>Date</label>
+                        <input
+                            type="date"
+                            name="date"
+                            className={styles.neonInput}
+                            value={formData.date}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.row}>
+                    <div className={styles.architectFormGroup} style={{ flexDirection: 'row', alignItems: 'center', gap: '1rem', background: 'rgba(0,0,0,0.2)', padding: '0.5rem', borderRadius: '8px' }}>
+                        <input
+                            type="checkbox"
+                            name="isAllDay"
+                            id="isAllDay"
+                            checked={formData.isAllDay}
+                            onChange={handleChange}
+                            style={{ width: '20px', height: '20px', accentColor: 'var(--accent-blue)' }}
+                        />
+                        <label htmlFor="isAllDay" className={styles.architectLabel} style={{ margin: 0, cursor: 'pointer' }}>All Day Event</label>
+                    </div>
+
+                    {!formData.isAllDay && (
+                        <div className={styles.architectFormGroup}>
+                            <label className={styles.architectLabel}>Time</label>
+                            <input
+                                type="time"
+                                name="time"
+                                className={styles.neonInput}
+                                value={formData.time}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    )}
+                </div>
+
+                <div className={styles.architectFormGroup}>
+                    <label className={styles.architectLabel}><Repeat size={14} /> Recurrence Protocol</label>
+                    <select
+                        name="recurrence"
+                        className={styles.neonSelect}
+                        value={formData.recurrence}
+                        onChange={handleChange}
+                    >
+                        <option value="none">Single Mission (No Repeat)</option>
+                        <option value="weekly">Weekly Loop</option>
+                        <option value="monthly">Monthly Cycle</option>
+                    </select>
+                </div>
+
+                <div className={styles.row}>
+                    <div className={styles.architectFormGroup}>
+                        <label className={styles.architectLabel}>Venue / Sector</label>
+                        <input
+                            type="text"
+                            name="venue"
+                            className={styles.neonInput}
+                            placeholder="e.g. Lab 3 or Google Meet"
+                            value={formData.venue}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.architectFormGroup}>
+                        <label className={styles.architectLabel}>Division / Category</label>
+                        <select
+                            name="category"
+                            className={styles.neonSelect}
+                            value={formData.category}
+                            onChange={handleChange}
+                        >
+                            <option value="cp">Competitive Programming</option>
+                            <option value="web">Web Development</option>
+                            <option value="ml">Machine Learning</option>
+                            <option value="other">General / Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className={styles.architectFormGroup}>
+                    <label className={styles.architectLabel}>Mission Data (Description)</label>
+                    <textarea
+                        name="description"
+                        className={styles.neonTextarea}
+                        placeholder="Brief the operatives on the mission objectives..."
+                        value={formData.description}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className={styles.architectFormGroup}>
+                    <label className={styles.architectLabel}>Uplink (Registration URL)</label>
+                    <input
+                        type="url"
+                        name="registrationLink"
+                        className={styles.neonInput}
+                        placeholder="https://..."
+                        value={formData.registrationLink}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    id="publishBtn"
+                    className={styles.publishBtn}
+                    style={{
+                        background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-orange))',
+                        boxShadow: '0 4px 25px rgba(249, 115, 22, 0.4)'
+                    }}
+                >
+                    INITIATE PUBLISH PROTOCOL
+                </button>
+            </form>
+        </div>
+    );
+};
 
 export default Dashboard;
