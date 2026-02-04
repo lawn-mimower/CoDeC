@@ -1,6 +1,5 @@
 import React from 'react';
 import { clubHeads } from '../data/mockData';
-import './ClubHeadsPage.css';
 
 const ClubHeadsPage = () => {
     return (

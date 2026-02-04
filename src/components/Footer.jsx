@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Code2, Github, Twitter, Linkedin, Mail, Heart } from 'lucide-react';
 import styles from './Footer.module.css';
 
@@ -27,17 +27,17 @@ const Footer = () => {
                 <div className={styles.column}>
                     <h3>Discover</h3>
                     <ul className={styles.linkList}>
-                        <li><Link to="/divisions" className={styles.link}>Our Divisions</Link></li>
-                        <li><Link to="/events" className={styles.link}>Upcoming Events</Link></li>
-                        <li><Link to="/achievements" className={styles.link}>Hall of Fame</Link></li>
-                        <li><Link to="/heads" className={styles.link}>Leadership</Link></li>
+                        <li><Link href="/divisions" className={styles.link}>Our Divisions</Link></li>
+                        <li><Link href="/events" className={styles.link}>Upcoming Events</Link></li>
+                        <li><Link href="/achievements" className={styles.link}>Hall of Fame</Link></li>
+                        <li><Link href="/heads" className={styles.link}>Leadership</Link></li>
                     </ul>
                 </div>
 
                 <div className={styles.column}>
                     <h3>Collaborate</h3>
                     <ul className={styles.linkList}>
-                        <li><Link to="/login" className={styles.link}>Member Login</Link></li>
+                        <li><Link href="/login" className={styles.link}>Member Login</Link></li>
                         <li><a href="#" className={styles.link}>Join Discord</a></li>
                         <li><a href="#" className={styles.link}>Sponsorships</a></li>
                         <li><a href="#" className={styles.link}>Contact Us</a></li>

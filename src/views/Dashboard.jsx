@@ -1,8 +1,9 @@
+"use client";
 import React, { useState } from 'react';
 import { LayoutDashboard, Award, Users, MessageSquare, Calendar, Plus, Trophy, TrendingUp, Zap, Radio, Repeat } from 'lucide-react';
 import { currentUser } from '../data/mockData';
 import { EventManager } from '../utils/EventManager';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
@@ -246,7 +247,7 @@ const Discussions = () => (
 
 
 const EventArchitect = () => {
-    const navigate = useNavigate();
+    const router = useRouter();
     const [formData, setFormData] = useState({
         name: '',
         date: '',
@@ -285,7 +286,7 @@ const EventArchitect = () => {
 
         setTimeout(() => {
             alert("Event Uplink Established: Data successfully patched to the network.");
-            navigate('/events');
+            router.push('/events');
         }, 800);
     };
 

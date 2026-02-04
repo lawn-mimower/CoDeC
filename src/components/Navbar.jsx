@@ -1,5 +1,7 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Navbar.module.css';
@@ -7,7 +9,7 @@ import styles from './Navbar.module.css';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const location = useLocation();
+    const pathname = usePathname();
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -22,7 +24,7 @@ const Navbar = () => {
     // Close mobile menu when route changes
     useEffect(() => {
         setIsOpen(false);
-    }, [location]);
+    }, [pathname]);
 
     const navLinks = [
         { path: '/', label: 'Home' },
@@ -36,7 +38,7 @@ const Navbar = () => {
     return (
         <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
             <div className={styles.container}>
-                <Link to="/" className={styles.logo}>
+                <Link href="/" className={styles.logo}>
                     <Code2 size={28} className={styles.logoTextPrimary} />
                     <span>
                         <span className={styles.logoTextPrimary}>Co</span>
@@ -52,11 +54,11 @@ const Navbar = () => {
                     {navLinks.map((link) => (
                         <li key={link.path} className={styles.navItem}>
                             <Link
-                                to={link.path}
-                                className={`${styles.navLink} ${location.pathname === link.path ? styles.navLinkActive : ''}`}
+                                href={link.path}
+                                className={`${styles.navLink} ${pathname === link.path ? styles.navLinkActive : ''}`}
                             >
                                 {link.label}
-                                {location.pathname === link.path && (
+                                {pathname === link.path && (
                                     <motion.div
                                         className={styles.activeDot}
                                         layoutId="activeTab"

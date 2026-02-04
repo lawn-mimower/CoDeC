@@ -1,7 +1,6 @@
 import React from 'react';
 import { Trophy, Medal, Star } from 'lucide-react';
 import { achievements } from '../data/mockData';
-import './AchievementsPage.css';
 
 const AchievementsPage = () => {
     return (

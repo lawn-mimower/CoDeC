@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Activity, History, Repeat, Trash2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
