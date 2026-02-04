@@ -1,0 +1,113 @@
+/* [project]/src/views/LoginPage.css [app-client] (css) */
+.login-page {
+  background-color: #0a141ef2;
+  background-image: linear-gradient(#00ffff1a 1px, #0000 1px), linear-gradient(90deg, #00ffff1a 1px, #0000 1px);
+  background-size: 50px 50px;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px);
+  padding: 2rem;
+  font-family: Courier New, Courier, monospace;
+  display: flex;
+  position: relative;
+}
+
+.login-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -1px #0000000f;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-circle {
+  width: 48px;
+  height: 48px;
+  color: var(--primary-color);
+  background: #eff6ff;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1.5rem;
+  display: flex;
+}
+
+.login-header h1 {
+  color: var(--text-color);
+  margin-bottom: .5rem;
+  font-size: 1.5rem;
+}
+
+.login-header p {
+  color: #64748b;
+  font-size: .95rem;
+}
+
+.login-form {
+  flex-direction: column;
+  gap: 1.5rem;
+  display: flex;
+}
+
+.form-group {
+  flex-direction: column;
+  gap: .5rem;
+  display: flex;
+}
+
+.form-group label {
+  color: #334155;
+  font-size: .9rem;
+  font-weight: 500;
+}
+
+.form-group input {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  transition: all .2s;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px #2563eb1a;
+}
+
+.btn-login {
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 6px;
+  margin-top: 1rem;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background .2s;
+}
+
+.btn-login:hover {
+  background: #1d4ed8;
+}
+
+.login-footer {
+  text-align: center;
+  color: #64748b;
+  margin-top: 2rem;
+  font-size: .9rem;
+}
+
+.link {
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/*# sourceMappingURL=src_views_LoginPage_css_bad6b30c._.single.css.map*/

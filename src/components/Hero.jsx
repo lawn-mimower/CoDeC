@@ -1,5 +1,6 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowRight, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import styles from './Hero.module.css';
@@ -106,10 +107,10 @@ const Hero = ({ onActivateProtocol }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 2, duration: 0.5 }}
                 >
-                    <Link to="/events" className={styles.primaryBtn}>
+                    <Link href="/events" className={styles.primaryBtn}>
                         Explore Events <ArrowRight size={18} />
                     </Link>
-                    <Link to="/divisions" className={styles.secondaryBtn}>
+                    <Link href="/divisions" className={styles.secondaryBtn}>
                         Our Divisions <Terminal size={18} />
                     </Link>
                 </motion.div>

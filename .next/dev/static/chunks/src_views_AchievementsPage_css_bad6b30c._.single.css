@@ -1,0 +1,69 @@
+/* [project]/src/views/AchievementsPage.css [app-client] (css) */
+.achievements-timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.achievements-timeline:before {
+  content: "";
+  background: #e2e8f0;
+  border-radius: 4px;
+  width: 4px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.achievement-item {
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.achievement-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--accent-color);
+  z-index: 10;
+  background: #fff;
+  border: 4px solid #e2e8f0;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  transform: translateX(-50%);
+}
+
+.achievement-content {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px #0000000d;
+}
+
+.achievement-date {
+  color: #64748b;
+  margin-bottom: .5rem;
+  font-size: .9rem;
+  font-weight: 500;
+  display: block;
+}
+
+.achievement-content h3 {
+  color: var(--text-color);
+  margin-bottom: .5rem;
+  font-size: 1.3rem;
+}
+
+.achievement-content p {
+  color: #475569;
+}
+
+/*# sourceMappingURL=src_views_AchievementsPage_css_bad6b30c._.single.css.map*/
