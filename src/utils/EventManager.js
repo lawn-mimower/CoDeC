@@ -49,47 +49,21 @@ export const EventManager = {
         const past = [];
 
         allRawEvents.forEach(event => {
-            // Determine effective Dates
-            let eventDate = new Date(event.date);
-            // If specific time exists, combine it. Else default to End of Day for expiry check?
-            // "All Day" implies expiry at 23:59:59. Specific time implies expiry at that time.
-
-            let expiryDate = new Date(event.date);
-            if (event.isAllDay) {
-                expiryDate.setHours(23, 59, 59, 999);
-            } else if (event.time) {
-                const [hours, minutes] = event.time.split(':');
-                expiryDate.setHours(hours, minutes, 0, 0);
-                eventDate.setHours(hours, minutes, 0, 0); // specific start time
-            } else {
-                // Default legacy behavior: expiry at end of day
-                expiryDate.setHours(23, 59, 59, 999);
-            }
-
-            // Recurrence Logic
-            if (event.recurrence && event.recurrence !== 'none') {
-                // If the event is in the past, project it forward
-                if (expiryDate < now) {
-                    const projected = projectEvent(event, expiryDate, now);
-                    upcoming.push(projected);
-                    // Also keep a record in past if desired, 
-                    // but for now let's just show the upcoming occurrence.
-                    // To show history, we'd need to generate instances. 
-                    // Let's add the *original* to past if it was indeed past, 
-                    // but differentiating instances is complex without unique IDs.
-                    // Simplified: Recurring events always have an upcoming instance.
-                    // We can also push the 'original' to past for history.
-                    past.push({ ...event, isRecurringInstance: false });
-                } else {
+            // Simple logic: treat Supabase events as upcoming by default
+            // Just add all events to upcoming for now
+            try {
+                const eventDate = new Date(event.date);
+                if (isNaN(eventDate.getTime())) {
+                    console.warn('Invalid date for event:', event);
                     upcoming.push(event);
-                }
-            } else {
-                // Standard Logic
-                if (expiryDate >= now) {
+                } else if (eventDate >= now) {
                     upcoming.push(event);
                 } else {
                     past.push(event);
                 }
+            } catch (err) {
+                console.warn('Error parsing event date:', err, event);
+                upcoming.push(event);
             }
         });
 
