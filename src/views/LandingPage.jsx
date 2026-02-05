@@ -14,8 +14,13 @@ const LandingPage = () => {
     const router = useRouter(); // Changed from navigate to router
 
     useEffect(() => {
-        // Hydrate events from local storage/mock
-        setEventsData(EventManager.getEvents());
+        // Fetch events from Supabase (or fallback to mock/localStorage)
+        EventManager.getEvents()
+            .then(data => setEventsData(data))
+            .catch(err => {
+                console.error('Error fetching events:', err);
+                setEventsData({ upcoming: [] });
+            });
     }, []);
 
     const activateProtocol = () => {

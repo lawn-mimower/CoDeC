@@ -267,7 +267,6 @@ const EventArchitect = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         // Basic Validation
         if (!formData.name || !formData.date) {
             alert('Protocol Failed: Name and Date are required.');
@@ -275,19 +274,24 @@ const EventArchitect = () => {
         }
 
         // Save Event
-        EventManager.addEvent(formData);
+        EventManager.addEvent(formData)
+            .then(() => {
+                // Visual Feedback
+                const btn = document.getElementById('publishBtn');
+                if (btn) {
+                    btn.innerHTML = "UPLINK ESTABLISHED...";
+                    btn.style.background = "#4ade80";
+                }
 
-        // Visual Feedback
-        const btn = document.getElementById('publishBtn');
-        if (btn) {
-            btn.innerHTML = "UPLINK ESTABLISHED...";
-            btn.style.background = "#4ade80";
-        }
-
-        setTimeout(() => {
-            alert("Event Uplink Established: Data successfully patched to the network.");
-            router.push('/events');
-        }, 800);
+                setTimeout(() => {
+                    alert("Event Uplink Established: Data successfully patched to the network.");
+                    router.push('/events');
+                }, 800);
+            })
+            .catch(err => {
+                console.error('Error adding event:', err);
+                alert('Event Uplink Failed. Check console for details.');
+            });
     };
 
     return (
