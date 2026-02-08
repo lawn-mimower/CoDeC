@@ -29,20 +29,7 @@ const EventsPage = () => {
         }
     };
 
-    const listVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
 
-    const itemVariants = {
-        hidden: { opacity: 0, x: -20 },
-        visible: { opacity: 1, x: 0 }
-    };
 
     return (
         <div className={styles.pageContainer}>
@@ -67,19 +54,20 @@ const EventsPage = () => {
 
             <section className={styles.section}>
                 <h2 className={styles.sectionTitle}><Activity className="text-blue-500" /> Active Operations</h2>
-                <motion.div
+                {/* Debug Log */}
+                <div style={{ display: 'none' }}>{console.log('EventsPage Data:', eventsData)}</div>
+
+                <div
                     className={styles.list}
-                    variants={listVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
                 >
                     {eventsData.upcoming.length > 0 ? (
-                        eventsData.upcoming.map(event => (
+                        eventsData.upcoming.map((event, index) => (
                             <motion.div
                                 key={event.id}
                                 className={`${styles.card} ${styles.upcomingCard}`}
-                                variants={itemVariants}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1, duration: 0.5 }}
                             >
                                 <div className={styles.dateBox}>
                                     <Calendar size={24} />
@@ -157,7 +145,7 @@ const EventsPage = () => {
                     ) : (
                         <p className={styles.emptyState}>No active operations detected.</p>
                     )}
-                </motion.div>
+                </div>
             </section>
 
             <section className={styles.section}>

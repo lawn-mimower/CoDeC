@@ -1,5 +1,7 @@
 import { events as mockEvents } from '../data/mockData';
-import { supabase } from '../../lib/supabaseClient';
+import { createClient } from './supabase/client';
+
+const supabase = createClient();
 
 const STORAGE_KEY = 'codec_custom_events';
 
