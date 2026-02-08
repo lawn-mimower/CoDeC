@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LayoutDashboard, Award, Users, MessageSquare, Calendar, Plus, Trophy, TrendingUp, Zap, Radio, Repeat } from 'lucide-react';
 import { currentUser } from '../data/mockData';
 import { EventManager } from '../utils/EventManager';
@@ -7,7 +7,15 @@ import { useRouter } from 'next/navigation';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState('tracker');
+
+    useEffect(() => {
+        const isAuth = localStorage.getItem('isAuthenticated');
+        if (!isAuth) {
+            router.push('/login');
+        }
+    }, [router]);
 
     return (
         <div className={styles.dashboardContainer}>

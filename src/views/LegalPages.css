@@ -1,0 +1,61 @@
+/* Legal Pages Styles */
+.legal-page {
+    min-height: 100vh;
+    padding: 6rem 2rem 4rem;
+    background: var(--bg-dark);
+}
+
+.legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 3rem;
+    color: #cbd5e1;
+}
+
+.legal-container h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #60a5fa, #f97316);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legal-content h2 {
+    color: #f8fafc;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.legal-content p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: #94a3b8;
+}
+
+.legal-content ul {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    list-style: disc;
+}
+
+.legal-content li {
+    margin-bottom: 0.5rem;
+    color: #94a3b8;
+}
+
+.last-updated {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: #64748b;
+    font-style: italic;
+}

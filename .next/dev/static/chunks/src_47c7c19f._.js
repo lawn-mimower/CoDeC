@@ -419,7 +419,18 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 ;
 const Dashboard = ()=>{
     _s();
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const [activeTab, setActiveTab] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('tracker');
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Dashboard.useEffect": ()=>{
+            const isAuth = localStorage.getItem('isAuthenticated');
+            if (!isAuth) {
+                router.push('/login');
+            }
+        }
+    }["Dashboard.useEffect"], [
+        router
+    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$views$2f$Dashboard$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].dashboardContainer,
         children: [
@@ -437,7 +448,7 @@ const Dashboard = ()=>{
                                         children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$mockData$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currentUser"].name.charAt(0)
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 17,
+                                        lineNumber: 25,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -445,13 +456,13 @@ const Dashboard = ()=>{
                                         children: "LVL 42"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 18,
+                                        lineNumber: 26,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 16,
+                                lineNumber: 24,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -462,7 +473,7 @@ const Dashboard = ()=>{
                                         children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$mockData$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["currentUser"].name
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 21,
+                                        lineNumber: 29,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -473,19 +484,19 @@ const Dashboard = ()=>{
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 22,
+                                        lineNumber: 30,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 20,
+                                lineNumber: 28,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 15,
+                        lineNumber: 23,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -499,14 +510,14 @@ const Dashboard = ()=>{
                                         size: 20
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 31,
+                                        lineNumber: 39,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " Combat Log"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 27,
+                                lineNumber: 35,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -517,14 +528,14 @@ const Dashboard = ()=>{
                                         size: 20
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 37,
+                                        lineNumber: 45,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " Manage Events"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 33,
+                                lineNumber: 41,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -535,14 +546,14 @@ const Dashboard = ()=>{
                                         size: 20
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 43,
+                                        lineNumber: 51,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " Mission Briefs"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 39,
+                                lineNumber: 47,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -553,14 +564,14 @@ const Dashboard = ()=>{
                                         size: 20
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 49,
+                                        lineNumber: 57,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " Comms"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 45,
+                                lineNumber: 53,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -571,26 +582,26 @@ const Dashboard = ()=>{
                                         size: 20
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 55,
+                                        lineNumber: 63,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " Forum"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 51,
+                                lineNumber: 59,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 26,
+                        lineNumber: 34,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 14,
+                lineNumber: 22,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -598,43 +609,47 @@ const Dashboard = ()=>{
                 children: [
                     activeTab === 'tracker' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ContestTracker, {}, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 61,
+                        lineNumber: 69,
                         columnNumber: 45
                     }, ("TURBOPACK compile-time value", void 0)),
                     activeTab === 'manage-events' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(EventArchitect, {}, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 62,
+                        lineNumber: 70,
                         columnNumber: 51
                     }, ("TURBOPACK compile-time value", void 0)),
                     activeTab === 'meetings' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(MeetingUpdates, {}, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 63,
+                        lineNumber: 71,
                         columnNumber: 46
                     }, ("TURBOPACK compile-time value", void 0)),
                     activeTab === 'announcements' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Announcements, {}, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 64,
+                        lineNumber: 72,
                         columnNumber: 51
                     }, ("TURBOPACK compile-time value", void 0)),
                     activeTab === 'discussions' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Discussions, {}, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 65,
+                        lineNumber: 73,
                         columnNumber: 49
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 60,
+                lineNumber: 68,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/views/Dashboard.jsx",
-        lineNumber: 13,
+        lineNumber: 21,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(Dashboard, "0uYJrg6Wvbs7KBSGfeYbX1qL7ww=");
+_s(Dashboard, "66T9HazZ0x3PNPNNcYGNXd4iaE0=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
+    ];
+});
 _c = Dashboard;
 const ContestTracker = ()=>{
     _s1();
@@ -687,19 +702,19 @@ const ContestTracker = ()=>{
                             className: "text-yellow-500"
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 104,
+                            lineNumber: 112,
                             columnNumber: 53
                         }, ("TURBOPACK compile-time value", void 0)),
                         " Operational Stats"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/views/Dashboard.jsx",
-                    lineNumber: 104,
+                    lineNumber: 112,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 103,
+                lineNumber: 111,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -713,7 +728,7 @@ const ContestTracker = ()=>{
                                 children: totalContests
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 109,
+                                lineNumber: 117,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -721,13 +736,13 @@ const ContestTracker = ()=>{
                                 children: "Contests"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 110,
+                                lineNumber: 118,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 108,
+                        lineNumber: 116,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -738,7 +753,7 @@ const ContestTracker = ()=>{
                                 children: totalProblems
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 113,
+                                lineNumber: 121,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -746,13 +761,13 @@ const ContestTracker = ()=>{
                                 children: "Problems Solved"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 114,
+                                lineNumber: 122,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 112,
+                        lineNumber: 120,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -766,7 +781,7 @@ const ContestTracker = ()=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 117,
+                                lineNumber: 125,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -774,19 +789,19 @@ const ContestTracker = ()=>{
                                 children: "Best Performance"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 118,
+                                lineNumber: 126,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 116,
+                        lineNumber: 124,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 107,
+                lineNumber: 115,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -803,7 +818,7 @@ const ContestTracker = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 123,
+                        lineNumber: 131,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -817,7 +832,7 @@ const ContestTracker = ()=>{
                                 children: "Codeforces"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 133,
+                                lineNumber: 141,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -825,7 +840,7 @@ const ContestTracker = ()=>{
                                 children: "CodeChef"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 134,
+                                lineNumber: 142,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -833,7 +848,7 @@ const ContestTracker = ()=>{
                                 children: "AtCoder"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 135,
+                                lineNumber: 143,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -841,13 +856,13 @@ const ContestTracker = ()=>{
                                 children: "LeetCode"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 136,
+                                lineNumber: 144,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 132,
+                        lineNumber: 140,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -859,7 +874,7 @@ const ContestTracker = ()=>{
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 138,
+                        lineNumber: 146,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -871,7 +886,7 @@ const ContestTracker = ()=>{
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 146,
+                        lineNumber: 154,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -883,7 +898,7 @@ const ContestTracker = ()=>{
                         onChange: handleChange
                     }, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 154,
+                        lineNumber: 162,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -893,18 +908,18 @@ const ContestTracker = ()=>{
                             size: 20
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 162,
+                            lineNumber: 170,
                             columnNumber: 65
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 162,
+                        lineNumber: 170,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 122,
+                lineNumber: 130,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -919,46 +934,46 @@ const ContestTracker = ()=>{
                                         children: "Operation"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 169,
+                                        lineNumber: 177,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                         children: "Platform"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 170,
+                                        lineNumber: 178,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                         children: "Kills (Probs)"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 171,
+                                        lineNumber: 179,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                         children: "Rating Delta"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 172,
+                                        lineNumber: 180,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                         children: "Intel"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 173,
+                                        lineNumber: 181,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 168,
+                                lineNumber: 176,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 167,
+                            lineNumber: 175,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -968,21 +983,21 @@ const ContestTracker = ()=>{
                                             children: e.name
                                         }, void 0, false, {
                                             fileName: "[project]/src/views/Dashboard.jsx",
-                                            lineNumber: 179,
+                                            lineNumber: 187,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                             children: e.platform
                                         }, void 0, false, {
                                             fileName: "[project]/src/views/Dashboard.jsx",
-                                            lineNumber: 180,
+                                            lineNumber: 188,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                             children: e.problems
                                         }, void 0, false, {
                                             fileName: "[project]/src/views/Dashboard.jsx",
-                                            lineNumber: 181,
+                                            lineNumber: 189,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -990,42 +1005,42 @@ const ContestTracker = ()=>{
                                             children: e.ratingChange
                                         }, void 0, false, {
                                             fileName: "[project]/src/views/Dashboard.jsx",
-                                            lineNumber: 182,
+                                            lineNumber: 190,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                             children: e.notes
                                         }, void 0, false, {
                                             fileName: "[project]/src/views/Dashboard.jsx",
-                                            lineNumber: 185,
+                                            lineNumber: 193,
                                             columnNumber: 33
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, e.id, true, {
                                     fileName: "[project]/src/views/Dashboard.jsx",
-                                    lineNumber: 178,
+                                    lineNumber: 186,
                                     columnNumber: 29
                                 }, ("TURBOPACK compile-time value", void 0)))
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 176,
+                            lineNumber: 184,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/views/Dashboard.jsx",
-                    lineNumber: 166,
+                    lineNumber: 174,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 165,
+                lineNumber: 173,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/views/Dashboard.jsx",
-        lineNumber: 102,
+        lineNumber: 110,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -1042,19 +1057,19 @@ const MeetingUpdates = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$
                             size: 28
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 198,
+                            lineNumber: 206,
                             columnNumber: 49
                         }, ("TURBOPACK compile-time value", void 0)),
                         " Mission Briefs"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/views/Dashboard.jsx",
-                    lineNumber: 198,
+                    lineNumber: 206,
                     columnNumber: 13
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 197,
+                lineNumber: 205,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1070,7 +1085,7 @@ const MeetingUpdates = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$
                                 children: m.date
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 203,
+                                lineNumber: 211,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -1081,7 +1096,7 @@ const MeetingUpdates = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$
                                 children: m.agenda
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 204,
+                                lineNumber: 212,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1091,24 +1106,24 @@ const MeetingUpdates = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$
                                 children: m.keyPoints
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 205,
+                                lineNumber: 213,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, m.id, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 202,
+                        lineNumber: 210,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 200,
+                lineNumber: 208,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/views/Dashboard.jsx",
-        lineNumber: 196,
+        lineNumber: 204,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 _c2 = MeetingUpdates;
@@ -1123,19 +1138,19 @@ const Announcements = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$p
                             size: 28
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 215,
+                            lineNumber: 223,
                             columnNumber: 49
                         }, ("TURBOPACK compile-time value", void 0)),
                         " Global Comms"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/views/Dashboard.jsx",
-                    lineNumber: 215,
+                    lineNumber: 223,
                     columnNumber: 13
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 214,
+                lineNumber: 222,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1152,7 +1167,7 @@ const Announcements = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$p
                                 children: a.date
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 220,
+                                lineNumber: 228,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1162,24 +1177,24 @@ const Announcements = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$p
                                 children: a.content
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 221,
+                                lineNumber: 229,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, a.id, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 219,
+                        lineNumber: 227,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 217,
+                lineNumber: 225,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/views/Dashboard.jsx",
-        lineNumber: 213,
+        lineNumber: 221,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 _c3 = Announcements;
@@ -1194,19 +1209,19 @@ const Discussions = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$pro
                             size: 28
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 231,
+                            lineNumber: 239,
                             columnNumber: 49
                         }, ("TURBOPACK compile-time value", void 0)),
                         " Encrypted Channels"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/views/Dashboard.jsx",
-                    lineNumber: 231,
+                    lineNumber: 239,
                     columnNumber: 13
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 230,
+                lineNumber: 238,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1231,7 +1246,7 @@ const Discussions = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$pro
                                         children: d.author
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 237,
+                                        lineNumber: 245,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1239,37 +1254,37 @@ const Discussions = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$pro
                                         children: d.timestamp
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 238,
+                                        lineNumber: 246,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 236,
+                                lineNumber: 244,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 children: d.content
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 240,
+                                lineNumber: 248,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, d.id, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 235,
+                        lineNumber: 243,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 233,
+                lineNumber: 241,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/views/Dashboard.jsx",
-        lineNumber: 229,
+        lineNumber: 237,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 _c4 = Discussions;
@@ -1326,19 +1341,19 @@ const EventArchitect = ()=>{
                             className: "text-pink-500 animate-pulse"
                         }, void 0, false, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 297,
+                            lineNumber: 305,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0)),
                         "Event Architect"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/views/Dashboard.jsx",
-                    lineNumber: 296,
+                    lineNumber: 304,
                     columnNumber: 17
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 295,
+                lineNumber: 303,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1353,7 +1368,7 @@ const EventArchitect = ()=>{
                                 children: "Operation Name"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 304,
+                                lineNumber: 312,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1366,13 +1381,13 @@ const EventArchitect = ()=>{
                                 autoFocus: true
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 305,
+                                lineNumber: 313,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 303,
+                        lineNumber: 311,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1385,7 +1400,7 @@ const EventArchitect = ()=>{
                                     children: "Date"
                                 }, void 0, false, {
                                     fileName: "[project]/src/views/Dashboard.jsx",
-                                    lineNumber: 318,
+                                    lineNumber: 326,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1396,18 +1411,18 @@ const EventArchitect = ()=>{
                                     onChange: handleChange
                                 }, void 0, false, {
                                     fileName: "[project]/src/views/Dashboard.jsx",
-                                    lineNumber: 319,
+                                    lineNumber: 327,
                                     columnNumber: 25
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/views/Dashboard.jsx",
-                            lineNumber: 317,
+                            lineNumber: 325,
                             columnNumber: 21
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 316,
+                        lineNumber: 324,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1437,7 +1452,7 @@ const EventArchitect = ()=>{
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 331,
+                                        lineNumber: 339,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1450,13 +1465,13 @@ const EventArchitect = ()=>{
                                         children: "All Day Event"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 339,
+                                        lineNumber: 347,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 330,
+                                lineNumber: 338,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             !formData.isAllDay && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1467,7 +1482,7 @@ const EventArchitect = ()=>{
                                         children: "Time"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 344,
+                                        lineNumber: 352,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1478,19 +1493,19 @@ const EventArchitect = ()=>{
                                         onChange: handleChange
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 345,
+                                        lineNumber: 353,
                                         columnNumber: 29
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 343,
+                                lineNumber: 351,
                                 columnNumber: 25
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 329,
+                        lineNumber: 337,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1503,14 +1518,14 @@ const EventArchitect = ()=>{
                                         size: 14
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 357,
+                                        lineNumber: 365,
                                         columnNumber: 62
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " Recurrence Protocol"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 357,
+                                lineNumber: 365,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1524,7 +1539,7 @@ const EventArchitect = ()=>{
                                         children: "Single Mission (No Repeat)"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 364,
+                                        lineNumber: 372,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1532,7 +1547,7 @@ const EventArchitect = ()=>{
                                         children: "Weekly Loop"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 365,
+                                        lineNumber: 373,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1540,19 +1555,19 @@ const EventArchitect = ()=>{
                                         children: "Monthly Cycle"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 366,
+                                        lineNumber: 374,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 358,
+                                lineNumber: 366,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 356,
+                        lineNumber: 364,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1566,7 +1581,7 @@ const EventArchitect = ()=>{
                                         children: "Venue / Sector"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 372,
+                                        lineNumber: 380,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1578,13 +1593,13 @@ const EventArchitect = ()=>{
                                         onChange: handleChange
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 373,
+                                        lineNumber: 381,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 371,
+                                lineNumber: 379,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1595,7 +1610,7 @@ const EventArchitect = ()=>{
                                         children: "Division / Category"
                                     }, void 0, false, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 383,
+                                        lineNumber: 391,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1609,7 +1624,7 @@ const EventArchitect = ()=>{
                                                 children: "Competitive Programming"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                                lineNumber: 390,
+                                                lineNumber: 398,
                                                 columnNumber: 29
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1617,7 +1632,7 @@ const EventArchitect = ()=>{
                                                 children: "Web Development"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                                lineNumber: 391,
+                                                lineNumber: 399,
                                                 columnNumber: 29
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1625,7 +1640,7 @@ const EventArchitect = ()=>{
                                                 children: "Machine Learning"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                                lineNumber: 392,
+                                                lineNumber: 400,
                                                 columnNumber: 29
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1633,25 +1648,25 @@ const EventArchitect = ()=>{
                                                 children: "General / Other"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                                lineNumber: 393,
+                                                lineNumber: 401,
                                                 columnNumber: 29
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/views/Dashboard.jsx",
-                                        lineNumber: 384,
+                                        lineNumber: 392,
                                         columnNumber: 25
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 382,
+                                lineNumber: 390,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 370,
+                        lineNumber: 378,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1662,7 +1677,7 @@ const EventArchitect = ()=>{
                                 children: "Mission Data (Description)"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 399,
+                                lineNumber: 407,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1673,13 +1688,13 @@ const EventArchitect = ()=>{
                                 onChange: handleChange
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 400,
+                                lineNumber: 408,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 398,
+                        lineNumber: 406,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1690,7 +1705,7 @@ const EventArchitect = ()=>{
                                 children: "Uplink (Registration URL)"
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 410,
+                                lineNumber: 418,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1702,13 +1717,13 @@ const EventArchitect = ()=>{
                                 onChange: handleChange
                             }, void 0, false, {
                                 fileName: "[project]/src/views/Dashboard.jsx",
-                                lineNumber: 411,
+                                lineNumber: 419,
                                 columnNumber: 21
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 409,
+                        lineNumber: 417,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1722,19 +1737,19 @@ const EventArchitect = ()=>{
                         children: "INITIATE PUBLISH PROTOCOL"
                     }, void 0, false, {
                         fileName: "[project]/src/views/Dashboard.jsx",
-                        lineNumber: 421,
+                        lineNumber: 429,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/views/Dashboard.jsx",
-                lineNumber: 302,
+                lineNumber: 310,
                 columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/views/Dashboard.jsx",
-        lineNumber: 294,
+        lineNumber: 302,
         columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
