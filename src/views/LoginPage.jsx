@@ -73,7 +73,7 @@ const LoginPage = () => {
 
                 <div className="login-footer">
                     <p>UNAUTHORIZED ACCESS IS PROHIBITED</p>
-                    <a href="#" className="link">Sign-Up?</a>
+
                 </div>
             </div>
         </div>
