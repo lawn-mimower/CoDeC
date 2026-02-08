@@ -10,6 +10,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
+    const isDashboard = pathname?.startsWith('/dashboard') || pathname?.startsWith('/admin');
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -26,12 +27,14 @@ const Navbar = () => {
         setIsOpen(false);
     }, [pathname]);
 
+    if (isDashboard) return null;
+
     const navLinks = [
         { path: '/', label: 'Home' },
         { path: '/divisions', label: 'Divisions' },
         { path: '/heads', label: 'Club Heads' },
         { path: '/events', label: 'Events' },
-        { path: '/connect', label: 'Nexus' },
+        { path: '/connect', label: 'Recruitment' },
         { path: '/achievements', label: 'Achievements' },
     ];
 

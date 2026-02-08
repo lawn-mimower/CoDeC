@@ -326,7 +326,6 @@ npm run dev
 
 
 ---
-
 ## 🎯 Future Enhancements
 
 - Connect to a real backend API

@@ -1,26 +1,116 @@
 "use client";
-import React, { useState } from 'react';
-import { LayoutDashboard, Award, Users, MessageSquare, Calendar, Plus, Trophy, TrendingUp, Zap, Radio, Repeat } from 'lucide-react';
-import { currentUser } from '../data/mockData';
-import { EventManager } from '../utils/EventManager';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { LayoutDashboard, Award, Calendar, Plus, Trophy, TrendingUp, Radio, Repeat, Loader, LogOut } from 'lucide-react';
+import { createClient } from '../utils/supabase/client';
+import { EventManager } from '../utils/EventManager';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState('tracker');
+    const [isLoading, setIsLoading] = useState(true);
+    const [userProfile, setUserProfile] = useState(null);
+    const [dashboardData, setDashboardData] = useState({
+        contests: [],
+        meetings: [],
+        announcements: [],
+        discussions: []
+    });
+
+    const supabase = createClient();
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut();
+        router.push('/login');
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // 1. Check Auth
+                const { data: { user }, error: authError } = await supabase.auth.getUser();
+                if (authError || !user) {
+                    router.push('/login');
+                    return;
+                }
+
+                // 2. Fetch User Profile (from 'members' table as per user setup)
+                // We assume 'members' table has 'user_id', 'name', 'role'
+                let { data: profile, error: profileError } = await supabase
+                    .from('members')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .single();
+
+                if (profileError && profileError.code !== 'PGRST116') {
+                    console.error("Profile fetch error:", profileError);
+                }
+
+                // Fallback if no profile found (just use auth metadata or defaults)
+                if (!profile) {
+                    profile = {
+                        name: user.user_metadata?.name || user.email.split('@')[0],
+                        role: 'Member' // Default role
+                    };
+                }
+
+                setUserProfile(profile);
+
+                // 3. Fetch Data in Parallel
+                const [
+                    { data: contests },
+                    { data: meetings }
+                ] = await Promise.all([
+                    supabase.from('contests').select('*').eq('user_id', user.id).order('created_at', { ascending: false }),
+                    supabase.from('meetings').select('*').order('date', { ascending: true })
+                ]);
+
+                setDashboardData({
+                    contests: contests || [],
+                    meetings: meetings || []
+                });
+
+            } catch (err) {
+                console.error("Dashboard data load failed:", err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [router]);
+
+    if (isLoading) {
+        return (
+            <div className={styles.dashboardContainer} style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ color: '#4ade80', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                    <Loader size={48} className="animate-spin" />
+                    <p>ESTABLISHING SECURE UPLINK...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.dashboardContainer}>
             <aside className={styles.sidebar}>
                 <div className={styles.userProfile}>
                     <div className={styles.avatarContainer}>
-                        <div className={styles.avatar}>{currentUser.name.charAt(0)}</div>
-                        <div className={styles.rankBadge}>LVL 42</div>
+                        <div className={styles.avatar}>{(userProfile?.name || 'A').charAt(0).toUpperCase()}</div>
+
                     </div>
                     <div className={styles.userInfo}>
-                        <h3 className={styles.userName}>{currentUser.name}</h3>
-                        <span className={styles.userRole}>{currentUser.role}Class</span>
+                        <h3 className={styles.userName}>{userProfile?.name || 'Agent'}</h3>
+                        <span className={styles.userRole}>{userProfile?.role || 'Member'} Class</span>
                     </div>
+                    <button
+                        onClick={handleSignOut}
+                        className={styles.navBtn}
+                        style={{ marginTop: '0.5rem', justifyContent: 'center', color: '#ff4d4d', border: '1px solid #ff4d4d' }}
+                    >
+                        <LogOut size={16} /> Sign Out
+                    </button>
                 </div>
 
                 <nav className={styles.nav}>
@@ -30,46 +120,41 @@ const Dashboard = () => {
                     >
                         <Award size={20} /> Combat Log
                     </button>
-                    <button
-                        className={`${styles.navBtn} ${activeTab === 'manage-events' ? styles.activeTab : ''}`}
-                        onClick={() => setActiveTab('manage-events')}
-                    >
-                        <Radio size={20} /> Manage Events
-                    </button>
+
+                    {/* Only show Event Architect for Admins */}
+                    {userProfile?.role === 'admin' && (
+                        <button
+                            className={`${styles.navBtn} ${activeTab === 'manage-events' ? styles.activeTab : ''}`}
+                            onClick={() => setActiveTab('manage-events')}
+                        >
+                            <Radio size={20} /> Manage Events
+                        </button>
+                    )}
+
                     <button
                         className={`${styles.navBtn} ${activeTab === 'meetings' ? styles.activeTab : ''}`}
                         onClick={() => setActiveTab('meetings')}
                     >
                         <Calendar size={20} /> Mission Briefs
                     </button>
-                    <button
-                        className={`${styles.navBtn} ${activeTab === 'announcements' ? styles.activeTab : ''}`}
-                        onClick={() => setActiveTab('announcements')}
-                    >
-                        <Users size={20} /> Comms
-                    </button>
-                    <button
-                        className={`${styles.navBtn} ${activeTab === 'discussions' ? styles.activeTab : ''}`}
-                        onClick={() => setActiveTab('discussions')}
-                    >
-                        <MessageSquare size={20} /> Forum
-                    </button>
+
                 </nav>
             </aside>
 
             <main className={styles.content}>
-                {activeTab === 'tracker' && <ContestTracker />}
-                {activeTab === 'manage-events' && <EventArchitect />}
-                {activeTab === 'meetings' && <MeetingUpdates />}
-                {activeTab === 'announcements' && <Announcements />}
-                {activeTab === 'discussions' && <Discussions />}
+                {activeTab === 'tracker' && <ContestTracker initialEntries={dashboardData.contests} user={userProfile} />}
+                {activeTab === 'manage-events' && <EventArchitect user={userProfile} />}
+                {activeTab === 'meetings' && <MeetingUpdates meetings={dashboardData.meetings} />}
+
             </main>
         </div>
     );
 };
 
-const ContestTracker = () => {
-    const [entries, setEntries] = useState(currentUser.contests);
+// Sub-components updated to accept props
+const ContestTracker = ({ initialEntries = [], user }) => {
+    const supabase = createClient();
+    const [entries, setEntries] = useState(initialEntries);
     const [formData, setFormData] = useState({
         name: '',
         platform: 'Codeforces',
@@ -78,14 +163,31 @@ const ContestTracker = () => {
         notes: ''
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const newEntry = {
+
+        // Optimistic update
+        const newEntryLocal = {
             id: Date.now(),
             ...formData,
             problems: parseInt(formData.problems) || 0
         };
-        setEntries([newEntry, ...entries]);
+        setEntries([newEntryLocal, ...entries]);
+
+        // Persist to Supabase
+        const { data: { user: currentUser } } = await supabase.auth.getUser();
+        if (currentUser) {
+            const { error } = await supabase.from('contests').insert([{
+                user_id: currentUser.id,
+                name: formData.name,
+                platform: formData.platform,
+                problems: parseInt(formData.problems) || 0,
+                rating_change: formData.ratingChange, // Check schema column name snake_case
+                notes: formData.notes
+            }]);
+            if (error) console.error("Error saving contest stats:", error);
+        }
+
         setFormData({ name: '', platform: 'Codeforces', problems: '', ratingChange: '', notes: '' });
     };
 
@@ -96,7 +198,7 @@ const ContestTracker = () => {
     // Calculate stats
     const totalContests = entries.length;
     const totalProblems = entries.reduce((acc, curr) => acc + (parseInt(curr.problems) || 0), 0);
-    const maxRatingChange = Math.max(...entries.map(e => parseInt(e.ratingChange) || 0), 0);
+    const maxRatingChange = entries.length > 0 ? Math.max(...entries.map(e => parseInt(e.ratingChange || e.rating_change) || 0), 0) : 0;
 
     return (
         <div>
@@ -179,8 +281,8 @@ const ContestTracker = () => {
                                 <td>{e.name}</td>
                                 <td>{e.platform}</td>
                                 <td>{e.problems}</td>
-                                <td className={e.ratingChange.startsWith('+') ? styles.positive : styles.negative}>
-                                    {e.ratingChange}
+                                <td className={(e.ratingChange || e.rating_change || '').startsWith('+') ? styles.positive : styles.negative}>
+                                    {e.ratingChange || e.rating_change}
                                 </td>
                                 <td>{e.notes}</td>
                             </tr>
@@ -192,52 +294,17 @@ const ContestTracker = () => {
     );
 };
 
-const MeetingUpdates = () => (
+const MeetingUpdates = ({ meetings = [] }) => (
     <div>
         <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}><Calendar size={28} /> Mission Briefs</h2>
         </div>
         <div className="updates-list">
-            {currentUser.meetings.map(m => (
+            {meetings.length === 0 ? <p style={{ color: '#666', padding: '1rem' }}>No upcoming briefings.</p> : meetings.map(m => (
                 <div key={m.id} className={styles.statCard} style={{ marginBottom: '1rem' }}>
                     <div className={styles.statLabel}>{m.date}</div>
                     <h3 style={{ fontSize: '1.2rem', margin: '0.5rem 0' }}>{m.agenda}</h3>
-                    <p style={{ color: 'var(--text-secondary)' }}>{m.keyPoints}</p>
-                </div>
-            ))}
-        </div>
-    </div>
-);
-
-const Announcements = () => (
-    <div>
-        <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}><Zap size={28} /> Global Comms</h2>
-        </div>
-        <div className="announcements-feed">
-            {currentUser.announcements.map(a => (
-                <div key={a.id} className={styles.statCard} style={{ marginBottom: '1rem', borderLeft: '3px solid var(--accent-pink)' }}>
-                    <div className={styles.statLabel}>{a.date}</div>
-                    <p style={{ marginTop: '0.5rem' }}>{a.content}</p>
-                </div>
-            ))}
-        </div>
-    </div>
-);
-
-const Discussions = () => (
-    <div>
-        <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}><MessageSquare size={28} /> Encrypted Channels</h2>
-        </div>
-        <div className="discussion-threads">
-            {currentUser.discussions.map(d => (
-                <div key={d.id} className={styles.statCard} style={{ marginBottom: '1rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                        <strong style={{ color: 'var(--primary-glow)' }}>{d.author}</strong>
-                        <span className={styles.statLabel}>{d.timestamp}</span>
-                    </div>
-                    <p>{d.content}</p>
+                    <p style={{ color: 'var(--text-secondary)' }}>{m.keyPoints || m.key_points}</p>
                 </div>
             ))}
         </div>
@@ -246,7 +313,7 @@ const Discussions = () => (
 
 
 
-const EventArchitect = () => {
+const EventArchitect = ({ user }) => {
     const router = useRouter();
     const [formData, setFormData] = useState({
         name: '',
@@ -267,14 +334,21 @@ const EventArchitect = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         // Basic Validation
         if (!formData.name || !formData.date) {
             alert('Protocol Failed: Name and Date are required.');
             return;
         }
 
+        const eventData = {
+            ...formData,
+            created_by: user?.user_id // Use user_id from profile or wait for backend to handle via auth.uid()
+        };
+
         // Save Event
-        EventManager.addEvent(formData)
+        // Note: EventManager might need updates to use Supabase, assuming it's still local or hybrid
+        EventManager.addEvent(eventData)
             .then(() => {
                 // Visual Feedback
                 const btn = document.getElementById('publishBtn');

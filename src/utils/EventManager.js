@@ -1,5 +1,7 @@
 import { events as mockEvents } from '../data/mockData';
-import { supabase } from '../../lib/supabaseClient';
+import { createClient } from './supabase/client';
+
+const supabase = createClient();
 
 const STORAGE_KEY = 'codec_custom_events';
 
@@ -166,6 +168,7 @@ export const EventManager = {
         }
 
         // Fallback: localStorage
+        const storedEvents = localStorage.getItem(STORAGE_KEY);
         if (!storedEvents) return;
 
         const customEvents = JSON.parse(storedEvents);

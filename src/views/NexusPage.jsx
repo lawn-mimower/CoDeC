@@ -1,54 +1,41 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './NexusPage.module.css';
 
 const NexusPage = () => {
-    const [activeTab, setActiveTab] = useState('recruitment');
-
-    // Generic Google Form placeholder URLs (replace with real ones later)
-    const forms = {
-        recruitment: "https://docs.google.com/forms/d/e/1FAIpQLSdXwZ4yW8kZ5t2z6xQ4yJ7g3J8k9l0mN1oP2qR3sT4uV5w/viewform?embedded=true",
-        contest: "https://docs.google.com/forms/d/e/1FAIpQLSf3Y3PGIDfVv-Xu75YMC6mWl1XDkxUvKHPEgntef42o0_GUtA/viewform?usp=publish-editor"
-    };
+    // Club Recruitment Form URL
+    const recruitmentFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdXwZ4yW8kZ5t2z6xQ4yJ7g3J8k9l0mN1oP2qR3sT4uV5w/viewform?embedded=true";
 
     return (
         <div className={styles.nexusContainer}>
             <div className={styles.heroSection}>
-                <p className={styles.heroSubtitle}>Join the Ranks / Report Victory.</p>
+                <h1 className={styles.pageTitle}>RECRUITMENT</h1>
+                <p className={styles.heroSubtitle}>Join the Ranks. Secure Your Legacy.</p>
             </div>
 
             <div className={styles.terminalContainer}>
                 <div className={styles.tabHeader}>
-                    <button
-                        className={`${styles.tabButton} ${activeTab === 'recruitment' ? styles.active : ''}`}
-                        onClick={() => setActiveTab('recruitment')}
-                    >
+                    <div className={styles.tabButton} style={{ color: '#fff', borderBottom: '2px solid var(--primary-glow)', textAlign: 'center' }}>
                         Club Recruitment
-                    </button>
-                    <button
-                        className={`${styles.tabButton} ${activeTab === 'contest' ? styles.active : ''}`}
-                        onClick={() => setActiveTab('contest')}
-                    >
-                        Victory Report
-                    </button>
+                    </div>
                     <div className={styles.glitchLine}></div>
                 </div>
 
                 <div className={styles.iframeWrapper}>
                     <iframe
-                        src={activeTab === 'recruitment' ? forms.recruitment : forms.contest}
+                        src={recruitmentFormUrl}
                         width="100%"
-                        height="800"
+                        height="900" // Increased height slightly
                         frameBorder="0"
                         marginHeight="0"
                         marginWidth="0"
-                        title="Nexus Form"
+                        title="Club Recruitment Form"
                         className={styles.styledIframe}
                     >Loading...</iframe>
                 </div>
 
                 <div className={styles.terminalFooter}>
-                    <span className={styles.statusBlink}>●</span> SYSTEM: WAITING FOR INPUT...
+                    <span className={styles.statusBlink}>●</span> SYSTEM: WAITING FOR RECRUIT INPUT...
                 </div>
             </div>
         </div>

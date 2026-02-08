@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Terminal, Globe, Brain } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { divisions } from '../data/mockData';
@@ -12,6 +12,39 @@ const iconMap = {
 };
 
 const DivisionsPage = () => {
+    const [divisionsData, setDivisionsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchDivisions = async () => {
+            try {
+                const { createClient } = await import('../utils/supabase/client');
+                const supabase = createClient();
+
+                const { data, error } = await supabase.from('divisions').select('*');
+
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    setDivisionsData(data);
+                } else {
+                    // Fallback to mock data if DB is empty
+                    setDivisionsData(divisions);
+                }
+            } catch (err) {
+                console.warn('Failed to fetch divisions, using mock:', err);
+                setDivisionsData(divisions);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchDivisions();
+    }, []);
+
+    if (isLoading) {
+        return <div style={{ color: 'white', textAlign: 'center', marginTop: '4rem' }}>Loading Divisions...</div>;
+    }
+
     return (
         <div className={styles.pageContainer}>
             <div className={styles.header}>
@@ -34,8 +67,8 @@ const DivisionsPage = () => {
             </div>
 
             <div className={styles.grid}>
-                {divisions.map((div, index) => {
-                    const IconComponent = iconMap[div.icon];
+                {divisionsData.map((div, index) => {
+                    const IconComponent = iconMap[div.icon] || Terminal; // Fallback icon
                     return (
                         <motion.div
                             key={div.id}
@@ -54,7 +87,7 @@ const DivisionsPage = () => {
                             <div className={styles.details}>
                                 <span className={styles.focus}>Mission: {div.focus}</span>
                                 <div className={styles.tags}>
-                                    {div.technologies.map(tech => (
+                                    {div.technologies && div.technologies.map(tech => (
                                         <span key={tech} className={styles.tag}>{tech}</span>
                                     ))}
                                 </div>
