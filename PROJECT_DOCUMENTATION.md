@@ -304,6 +304,28 @@ npm lint
 
 ---
 
+## 🗄️ Supabase Setup
+
+- **Create local env file:** Copy `.env.local.sample` to `.env.local` at the project root and fill in your Supabase values. Do NOT commit `.env.local`.
+
+  Example:
+
+  NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-public-key
+
+- **Where to get keys:** In the Supabase dashboard for your project — use the public anon key for client usage. Never expose a service role key in client code or any `NEXT_PUBLIC_` variable.
+
+- **Dev server:** After creating `.env.local` and installing dependencies, run:
+
+```bash
+npm run dev
+```
+
+---
+
+
+
+---
 ## 🎯 Future Enhancements
 
 - Connect to a real backend API

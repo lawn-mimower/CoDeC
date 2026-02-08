@@ -1,19 +1,48 @@
 import { events as mockEvents } from '../data/mockData';
+import { supabase } from '../../lib/supabaseClient';
 
 const STORAGE_KEY = 'codec_custom_events';
 
 export const EventManager = {
     /**
-     * Retrieves all events with advanced processing:
-     * - Merges mock + local data
+     * Retrieves all events from Supabase (or falls back to mock + local storage).
+     * - Merges Supabase data + local cache fallback
      * - Projects recurring events to their next occurrence
      * - Filters strictly by current time (NOW)
      * @returns {Object} { upcoming: [], past: [] }
      */
-    getEvents: () => {
-        const storedEvents = localStorage.getItem(STORAGE_KEY);
-        const customEvents = storedEvents ? JSON.parse(storedEvents) : [];
-        const allRawEvents = [...customEvents, ...mockEvents.upcoming, ...mockEvents.past];
+    getEvents: async () => {
+        let allRawEvents = [];
+        let error = null;
+
+        // Try to fetch from Supabase
+        if (supabase && supabase.from) {
+            try {
+                const { data, error: fetchError } = await supabase
+                    .from('events')
+                    .select('*')
+                    .order('date', { ascending: true });
+
+                if (fetchError) {
+                    console.warn('Supabase fetch error:', fetchError);
+                    error = fetchError;
+                } else if (data) {
+                    allRawEvents = data;
+                    console.log('Fetched events from Supabase:', data.length);
+                }
+            } catch (err) {
+                console.warn('Supabase connection error, falling back to mock data:', err);
+                error = err;
+            }
+        }
+
+        // Fallback to mock + local storage if Supabase unavailable
+        if (!supabase || error || allRawEvents.length === 0) {
+            console.log('Using fallback: mock data + localStorage');
+            const storedEvents = localStorage.getItem(STORAGE_KEY);
+            const customEvents = storedEvents ? JSON.parse(storedEvents) : [];
+            allRawEvents = [...customEvents, ...mockEvents.upcoming, ...mockEvents.past];
+        }
 
         const now = new Date();
         const upcoming = [];
@@ -74,29 +103,69 @@ export const EventManager = {
     },
 
     /**
-     * Adds a new event to local storage.
+     * Adds a new event to Supabase (or local storage if Supabase unavailable).
      * @param {Object} event 
      */
-    addEvent: (event) => {
-        const storedEvents = localStorage.getItem(STORAGE_KEY);
-        const customEvents = storedEvents ? JSON.parse(storedEvents) : [];
-
+    addEvent: async (event) => {
         const newEvent = {
             id: `custom-${Date.now()}`,
-            isCustom: true, // Marker for deletion rights
-            ...event
+            is_custom: true,
+            ...event,
+            date: event.date // Ensure date is YYYY-MM-DD string
         };
 
+        // Try Supabase first
+        if (supabase && supabase.from) {
+            try {
+                const { data, error } = await supabase
+                    .from('events')
+                    .insert([newEvent])
+                    .select();
+
+                if (error) {
+                    console.warn('Supabase insert error:', error);
+                    throw error;
+                }
+                console.log('Event inserted into Supabase:', data);
+                return data[0] || newEvent;
+            } catch (err) {
+                console.warn('Supabase write failed, falling back to localStorage:', err);
+            }
+        }
+
+        // Fallback: localStorage
+        const storedEvents = localStorage.getItem(STORAGE_KEY);
+        const customEvents = storedEvents ? JSON.parse(storedEvents) : [];
         const updatedEvents = [newEvent, ...customEvents];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedEvents));
         return newEvent;
     },
 
     /**
-     * Deletes a custom event by ID.
+     * Deletes a custom event by ID from Supabase (or local storage if unavailable).
      * @param {string} id 
      */
-    deleteEvent: (id) => {
+    deleteEvent: async (id) => {
+        // Try Supabase first
+        if (supabase && supabase.from) {
+            try {
+                const { error } = await supabase
+                    .from('events')
+                    .delete()
+                    .eq('id', parseInt(id));
+
+                if (error) {
+                    console.warn('Supabase delete error:', error);
+                    throw error;
+                }
+                console.log('Event deleted from Supabase');
+                return await EventManager.getEvents(); // Refresh and return updated list
+            } catch (err) {
+                console.warn('Supabase delete failed, falling back to localStorage:', err);
+            }
+        }
+
+        // Fallback: localStorage
         const storedEvents = localStorage.getItem(STORAGE_KEY);
         if (!storedEvents) return;
 

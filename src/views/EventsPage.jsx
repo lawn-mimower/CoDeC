@@ -10,14 +10,22 @@ const EventsPage = () => {
 
     useEffect(() => {
         // Fetch events on mount
-        const data = EventManager.getEvents();
-        setEventsData(data);
+        EventManager.getEvents()
+            .then(data => setEventsData(data))
+            .catch(err => {
+                console.error('Error fetching events:', err);
+                setEventsData({ upcoming: [], past: [] });
+            });
     }, []);
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Confirm Deletion Protocol? This action is irreversible.')) {
-            const updated = EventManager.deleteEvent(id);
-            if (updated) setEventsData(updated);
+            try {
+                const updated = await EventManager.deleteEvent(id);
+                if (updated) setEventsData(updated);
+            } catch (err) {
+                console.error('Error deleting event:', err);
+            }
         }
     };
 

@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { LayoutDashboard, Award, Users, MessageSquare, Calendar, Plus, Trophy, TrendingUp, Zap, Radio, Repeat } from 'lucide-react';
 import { currentUser } from '../data/mockData';
 import { EventManager } from '../utils/EventManager';
-import { useRouter } from 'next/navigation';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
@@ -16,7 +16,6 @@ const Dashboard = () => {
             router.push('/login');
         }
     }, [router]);
-
     return (
         <div className={styles.dashboardContainer}>
             <aside className={styles.sidebar}>
@@ -283,19 +282,25 @@ const EventArchitect = () => {
         }
 
         // Save Event
-        EventManager.addEvent(formData);
+        // Save Event
+        EventManager.addEvent(formData)
+            .then(() => {
+                // Visual Feedback
+                const btn = document.getElementById('publishBtn');
+                if (btn) {
+                    btn.innerHTML = "UPLINK ESTABLISHED...";
+                    btn.style.background = "#4ade80";
+                }
 
-        // Visual Feedback
-        const btn = document.getElementById('publishBtn');
-        if (btn) {
-            btn.innerHTML = "UPLINK ESTABLISHED...";
-            btn.style.background = "#4ade80";
-        }
-
-        setTimeout(() => {
-            alert("Event Uplink Established: Data successfully patched to the network.");
-            router.push('/events');
-        }, 800);
+                setTimeout(() => {
+                    alert("Event Uplink Established: Data successfully patched to the network.");
+                    router.push('/events');
+                }, 800);
+            })
+            .catch(err => {
+                console.error('Error adding event:', err);
+                alert('Event Uplink Failed. Check console for details.');
+            });
     };
 
     return (

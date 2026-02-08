@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Code2, Linkedin, Instagram, Heart } from 'lucide-react';
+import { Code2, Github, Twitter, Linkedin, Mail, Heart, Instagram } from 'lucide-react';
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -27,6 +27,9 @@ const Footer = () => {
                     <div className={styles.socialIcons}>
                         <a href="https://www.instagram.com/codecmitwpu/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}><Instagram size={20} /></a>
                         <a href="https://www.linkedin.com/company/codecofficial/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}><Linkedin size={20} /></a>
+                        <a href="#" className={styles.socialIcon}><Github size={20} /></a>
+                        <a href="#" className={styles.socialIcon}><Twitter size={20} /></a>
+                        <a href="#" className={styles.socialIcon}><Mail size={20} /></a>
                     </div>
                 </div>
 
@@ -43,7 +46,9 @@ const Footer = () => {
                 <div className={styles.column}>
                     <h3>Collaborate</h3>
                     <ul className={styles.linkList}>
+
                         <li><Link href="/login" className={styles.link}>Member Login</Link></li>
+                        <li><a href="#" className={styles.link}>Join Discord</a></li>
                         <li><Link href="/contact" className={styles.link}>Sponsorships</Link></li>
                         <li><Link href="/contact" className={styles.link}>Contact Us</Link></li>
                     </ul>
@@ -54,6 +59,7 @@ const Footer = () => {
                     <ul className={styles.linkList}>
                         <li><Link href="/privacy" className={styles.link}>Privacy Policy</Link></li>
                         <li><Link href="/terms" className={styles.link}>Terms of Service</Link></li>
+                        <li><a href="#" className={styles.link}>Code of Conduct</a></li>
                     </ul>
                 </div>
             </div>
