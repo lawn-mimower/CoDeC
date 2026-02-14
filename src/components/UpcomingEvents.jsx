@@ -1,10 +1,26 @@
-import React, { useRef } from 'react';
-import { Calendar, ExternalLink } from 'lucide-react';
+"use client";
+import React, { useRef, useState, useEffect } from 'react';
+import { Calendar, ExternalLink, LogIn, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { createClient } from '../utils/supabase/client';
+import { registerForEvent } from './actions';
 import styles from './UpcomingEvents.module.css';
 
 const UpcomingEvents = ({ events }) => {
+    const [user, setUser] = useState(null);
+    const [registering, setRegistering] = useState({});
+    const router = useRouter();
+    const supabase = createClient();
     const upcoming = (events?.upcoming || []).slice(0, 3);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            setUser(user);
+        };
+        getUser();
+    }, []);
 
     // Mouse move effect for card glow
     const handleMouseMove = (e) => {
@@ -22,6 +38,30 @@ const UpcomingEvents = ({ events }) => {
         if (!dateStr) return '';
         const d = new Date(dateStr);
         return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    };
+
+    const handleRegister = async (eventId, e) => {
+        e.preventDefault();
+
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+
+        setRegistering(prev => ({ ...prev, [eventId]: true }));
+        try {
+            const result = await registerForEvent(eventId);
+            if (result.success) {
+                alert(result.message);
+            } else {
+                alert("Registration Failed: " + result.message);
+            }
+        } catch (error) {
+            console.error("Registration error:", error);
+            alert("An unexpected error occurred.");
+        } finally {
+            setRegistering(prev => ({ ...prev, [eventId]: false }));
+        }
     };
 
     return (
@@ -54,14 +94,24 @@ const UpcomingEvents = ({ events }) => {
                                     <span>{formatDate(event.date)}</span>
                                 </div>
                                 <p className={styles.description}>{event.description}</p>
-                                <a
-                                    href={event.registrationLink || '#'}
-                                    className={styles.registerBtn}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Register Now <ExternalLink size={14} />
-                                </a>
+
+                                {user ? (
+                                    <button
+                                        onClick={(e) => handleRegister(event.id, e)}
+                                        className={styles.registerBtn}
+                                        disabled={registering[event.id]}
+                                    >
+                                        {registering[event.id] ? 'Registering...' : 'Register Now'}
+                                        {registering[event.id] ? null : <CheckCircle size={14} />}
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => router.push('/login')}
+                                        className={styles.registerBtn}
+                                    >
+                                        Login to Register <LogIn size={14} />
+                                    </button>
+                                )}
                             </div>
                         </motion.article>
                     ))}
