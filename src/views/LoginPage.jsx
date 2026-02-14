@@ -43,24 +43,8 @@ const LoginPage = () => {
         }
     };
 
-    const handleForgotPassword = async () => {
-        if (!email) {
-            setError("Please enter your email to reset password.");
-            return;
-        }
-        setIsLoading(true);
-        setError(null);
-        try {
-            const { error } = await supabase.auth.resetPasswordForEmail(email, {
-                redirectTo: `${window.location.origin}/auth/callback?next=/update-password`,
-            });
-            if (error) throw error;
-            alert("Password reset email sent!");
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
-        }
+    const handleForgotPassword = () => {
+        router.push('/forgot-password');
     };
 
     return (
