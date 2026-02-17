@@ -111,9 +111,39 @@
     opacity: 1;
 }
 
+/* ... existing styles ... */
+
 .emptyState {
     text-align: center;
     color: var(--text-secondary);
     font-size: 1.2rem;
     padding: 4rem;
+}
+
+/* Archive Specific Styles */
+.archiveCard {
+    opacity: 0.8;
+    filter: grayscale(0.6);
+    background: rgba(15, 23, 42, 0.6);
+    border-color: rgba(255, 255, 255, 0.02);
+}
+
+.archiveCard:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(148, 163, 184, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.archiveLabel {
+    margin-top: auto;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(148, 163, 184, 0.1);
+    color: #94a3b8;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    border: 1px solid rgba(148, 163, 184, 0.2);
 }
