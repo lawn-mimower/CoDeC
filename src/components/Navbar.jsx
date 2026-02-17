@@ -1,56 +1,76 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+"use client";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Code2 } from 'lucide-react';
-import './Navbar.css';
+import { motion, AnimatePresence } from 'framer-motion';
+import styles from './Navbar.module.css';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const location = useLocation();
+    const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+    const isDashboard = pathname?.startsWith('/dashboard') || pathname?.startsWith('/admin');
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
-    const isActive = (path) => location.pathname === path ? 'active' : '';
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Close mobile menu when route changes
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
+
+    if (isDashboard) return null;
+
+    const navLinks = [
+        { path: '/', label: 'Home' },
+        { path: '/divisions', label: 'Divisions' },
+        { path: '/heads', label: 'Club Heads' },
+        { path: '/events', label: 'Events' },
+        { path: '/connect', label: 'Recruitment' },
+        { path: '/achievements', label: 'Achievements' },
+    ];
 
     return (
-        <nav className="navbar">
-            <div className="navbar-container">
-                <Link to="/" className="navbar-logo">
-                    <Code2 size={28} style={{ color: '#f59e0b' }} />
-                    <span style={{ color: '#f59e0b' }}>Co</span>
-                    <span style={{ color: '#2563eb' }}>DeC</span>
+        <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
+            <div className={styles.container}>
+                <Link href="/" className={styles.logo}>
+                    <Code2 size={28} className={styles.logoTextPrimary} />
+                    <span>
+                        <span className={styles.logoTextPrimary}>Co</span>
+                        <span className={styles.logoTextSecondary}>DeC</span>
+                    </span>
                 </Link>
 
-                <div className="menu-icon" onClick={toggleMenu}>
+                <div className={styles.menuIcon} onClick={toggleMenu}>
                     {isOpen ? <X size={28} /> : <Menu size={28} />}
                 </div>
 
-                <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
-                    <li className="nav-item">
-                        <Link to="/" className={`nav-links ${isActive('/')}`} onClick={toggleMenu}>
-                            Home
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/divisions" className={`nav-links ${isActive('/divisions')}`} onClick={toggleMenu}>
-                            Divisions
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/heads" className={`nav-links ${isActive('/heads')}`} onClick={toggleMenu}>
-                            Club Heads
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/events" className={`nav-links ${isActive('/events')}`} onClick={toggleMenu}>
-                            Events
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/achievements" className={`nav-links ${isActive('/achievements')}`} onClick={toggleMenu}>
-                            Achievements
-                        </Link>
-                    </li>
-                    {/* Login removed for easter egg */}
+                <ul className={`${styles.navMenu} ${isOpen ? styles.navMenuActive : ''}`}>
+                    {navLinks.map((link) => (
+                        <li key={link.path} className={styles.navItem}>
+                            <Link
+                                href={link.path}
+                                className={`${styles.navLink} ${pathname === link.path ? styles.navLinkActive : ''}`}
+                            >
+                                {link.label}
+                                {pathname === link.path && (
+                                    <motion.div
+                                        className={styles.activeDot}
+                                        layoutId="activeTab"
+                                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                    />
+                                )}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </nav>
