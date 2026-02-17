@@ -79,36 +79,115 @@ export const achievements = [
     }
 ];
 
-export const clubHeads = [
+export const facultyMentors = [
     {
-        id: 1,
-        name: 'Mihir Mohite',
-        position: 'President',
-        image: 'https://ui-avatars.com/api/?name=Mihir+Mohite&background=2563eb&color=fff&size=200',
-        bio: 'Leading CoDeC with a vision to innovate and inspire. Focuses on strategic growth and community building.'
+        id: 'f1',
+        name: 'Dr. Vibha Patel',
+        position: 'Asst. Professor, DOEEE',
+        image: '',
+        bio: 'Faculty Mentor ensuring academic excellence and guidance.'
     },
     {
-        id: 2,
-        name: 'Sarah Chen',
-        position: 'Technical Lead',
-        image: 'https://ui-avatars.com/api/?name=Sarah+Chen&background=f59e0b&color=fff&size=200',
-        bio: 'Oversees all technical projects and workshops. Full-stack enthusiast.'
+        id: 'f2',
+        name: 'Dr. Shweta Kukade',
+        position: 'Asst. Professor, DOEEE',
+        image: '',
+        bio: 'Faculty Mentor supporting research and innovation.'
     },
     {
-        id: 3,
-        name: 'Rahul Sharma',
-        position: 'CP Head',
-        image: 'https://ui-avatars.com/api/?name=Rahul+Sharma&background=dc2626&color=fff&size=200',
-        bio: 'Grandmaster on Codeforces. Mentors students in competitive programming.'
-    },
-    {
-        id: 4,
-        name: 'Emily Davis',
-        position: 'Design Head',
-        image: 'https://ui-avatars.com/api/?name=Emily+Davis&background=059669&color=fff&size=200',
-        bio: 'Ensures all club assets follow the premium aesthetic guidelines.'
+        id: 'f3',
+        name: 'Dr. Sumitra Motade',
+        position: 'Asst. Professor, DOEEE',
+        image: '',
+        bio: 'Faculty Mentor fostering student leadership and skills.'
     }
 ];
+
+export const coreCouncil = [
+    {
+        id: 'c1',
+        name: 'Mihir Mohite',
+        position: 'President',
+        year: 'TY, DOEEE',
+        image: '', // Use placeholder in UI
+        bio: 'Leading CoDeC with a vision to innovate and inspire.'
+    },
+    {
+        id: 'c2',
+        name: 'Abhishek Karad',
+        position: 'Vice President',
+        year: 'TY, DOEEE',
+        image: '',
+        bio: 'Orchestrating club operations and strategic planning.'
+    },
+    {
+        id: 'c3',
+        name: 'Sujal Patil',
+        position: 'General Secretary',
+        year: 'TY, DOEEE',
+        image: '',
+        bio: 'Managing administrative affairs and student coordination.'
+    }
+];
+
+export const placements = [
+    { id: 'p1', name: 'Faiz Alam', company: 'Amadeus', package: '13.65 LPA', role: 'SDE' },
+    { id: 'p2', name: 'Ashish Tiwari', company: 'ZS Associates', package: '13.65 LPA', role: 'Consultant' },
+    { id: 'p3', name: 'Rohan Jha', company: 'ZS Associates', package: '13.65 LPA', role: 'Consultant' },
+    { id: 'p4', name: 'Varun Somani', company: 'UBS', package: '12.5 LPA', role: 'Analyst' },
+    { id: 'p5', name: 'Arayan Ashish', company: 'IBM', package: '12.25 LPA', role: 'SDE' },
+    { id: 'p6', name: 'Naman Anand', company: 'Oracle', package: '11.25 LPA', role: 'MTS' }
+];
+
+export const flagshipEvents = [
+    {
+        id: 'e1',
+        name: 'PINNACLE 2025',
+        date: 'April 1-4 2025',
+        sortDate: '2025-04-01',
+        stats: '280+ Participants',
+        description: 'Included "CodeRush" (CodeChef contest) and "GitSetGo" (GitHub workshop).',
+        type: 'flagship'
+    },
+    {
+        id: 'e2',
+        name: 'HackerRank Contest',
+        date: 'Feb 1 2026',
+        sortDate: '2026-02-01',
+        stats: '226+ Registered, 170 Active',
+        description: 'Placement-oriented contest focused on DSA key concepts.',
+        type: 'contest'
+    },
+    {
+        id: 'e3',
+        name: 'CP Bootcamp',
+        date: 'Nov 20-26',
+        sortDate: '2025-11-20',
+        stats: '100% Participation',
+        description: 'Intensive bootcamp with 100% participation in the post-bootcamp contest.',
+        type: 'bootcamp'
+    }
+];
+
+export const clubGlory = [
+    {
+        id: 'g1',
+        title: 'ICPC Amritapuri Regionals',
+        description: 'Team "CoDeC Barbarians" ranked 172/219, beating teams from IITs/NITs.',
+        metric: 'Rank 172/219',
+        highlight: true
+    },
+    {
+        id: 'g2',
+        title: 'AlgoZenith Program',
+        description: '30+ members selected for placement readiness program.',
+        metric: '30+ Selections',
+        highlight: false
+    }
+];
+
+// Keeping legacy export for compatibility until full migration
+export const clubHeads = [...coreCouncil];
 
 export const currentUser = {
     id: 'u1',
