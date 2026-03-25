@@ -3,10 +3,22 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Activity, History, Repeat, Trash2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { EventManager } from '../utils/EventManager';
+import EventRegistrationModal from '../components/EventRegistrationModal';
 import styles from './EventsPage.module.css';
+
+const formatDateToDDMMYYYY = (dateString) => {
+    if (!dateString) return '';
+    const parts = dateString.split('-');
+    if (parts.length === 3) {
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+    return dateString;
+};
 
 const EventsPage = () => {
     const [eventsData, setEventsData] = useState({ upcoming: [], past: [] });
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     useEffect(() => {
         // Fetch events on mount
@@ -53,7 +65,7 @@ const EventsPage = () => {
             </div>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}><Activity className="text-blue-500" /> Active Operations</h2>
+                <h2 className={styles.sectionTitle}><Activity style={{ color: 'var(--accent-blue)' }} /> Active Operations</h2>
                 {/* Debug Log */}
                 <div style={{ display: 'none' }}>{console.log('EventsPage Data:', eventsData)}</div>
 
@@ -71,7 +83,7 @@ const EventsPage = () => {
                             >
                                 <div className={styles.dateBox}>
                                     <Calendar size={24} />
-                                    <span>{event.date}</span>
+                                    <span>{formatDateToDDMMYYYY(event.date)}</span>
                                     {!event.isAllDay && event.time && (
                                         <div style={{ fontSize: '0.8em', marginTop: '4px', opacity: 0.8 }}>{event.time}</div>
                                     )}
@@ -110,7 +122,7 @@ const EventsPage = () => {
                                     <p className={styles.description}>{event.description}</p>
 
                                     <div className={styles.meta} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '12px' }}>
-                                        {event.venue && <span className={styles.metaTag} style={{ background: 'rgba(255,255,255,0.1)', padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>📍 {event.venue}</span>}
+                                        {event.venue && <span className={styles.metaTag} style={{ background: 'var(--div-tag-bg)', color: 'var(--text-secondary)', border: '1px solid var(--div-tag-border)', padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>📍 {event.venue}</span>}
                                         {event.category && (
                                             <span className={styles.metaTag} style={{
                                                 background: 'rgba(59, 130, 246, 0.2)',
@@ -128,16 +140,25 @@ const EventsPage = () => {
                                     </div>
 
                                     <div className={styles.actions}>
-                                        <a
-                                            href={event.registrationLink || '#'}
-                                            className={styles.registerBtn}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            onClick={(e) => !event.registrationLink && e.preventDefault()}
-                                        >
-                                            {event.registrationLink ? 'Register Now' : 'Registration Closed'}
-                                        </a>
-                                        {!event.registrationLink && <span className={styles.infoText}>// Access Restricted</span>}
+                                        {(event.registrationLink || event.registration_link) ? (
+                                            <button
+                                                className={styles.registerBtn}
+                                                onClick={() => {
+                                                    setSelectedEvent(event);
+                                                    setIsModalOpen(true);
+                                                }}
+                                            >
+                                                Register Now
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className={styles.registerBtn}
+                                                disabled
+                                            >
+                                                Registration Closed
+                                            </button>
+                                        )}
+                                        {!(event.registrationLink || event.registration_link) && <span className={styles.infoText}>// Access Restricted</span>}
                                     </div>
                                 </div>
                             </motion.div>
@@ -149,13 +170,13 @@ const EventsPage = () => {
             </section>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}><History className="text-slate-400" /> Mission Archive</h2>
+                <h2 className={styles.sectionTitle}><History style={{ color: 'var(--text-secondary)' }} /> Mission Archive</h2>
                 <div className={styles.list}>
                     {eventsData.past.map(event => (
                         <div key={event.id} className={`${styles.card} ${styles.pastCard}`}>
                             <div className={styles.dateBox}>
                                 <Clock size={24} />
-                                <span>{event.date}</span>
+                                <span>{formatDateToDDMMYYYY(event.date)}</span>
                             </div>
                             <div className={styles.content}>
                                 <h3 className={styles.cardTitle}>{event.name}</h3>
@@ -165,6 +186,12 @@ const EventsPage = () => {
                     ))}
                 </div>
             </section>
+
+            <EventRegistrationModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                event={selectedEvent} 
+            />
         </div>
     );
 };

@@ -1,7 +1,7 @@
 .section {
     position: relative;
     padding: 6rem 2rem;
-    background: var(--bg-dark);
+    background: var(--bg-primary);
 }
 
 .title {
@@ -10,9 +10,9 @@
     font-weight: 700;
     font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: 3rem;
-    background: linear-gradient(to right, #fff, #94a3b8);
-    -webkit-background-clip: text;
+    background: var(--event-header-bg);
     background-clip: text;
+    -webkit-background-clip: text;
     color: transparent;
 }
 
@@ -26,8 +26,9 @@
 
 .card {
     position: relative;
-    background: rgba(30, 41, 59, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--event-card-bg);
+    border: var(--event-card-border);
+    box-shadow: var(--event-card-shadow);
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -36,8 +37,8 @@
 
 .card:hover {
     transform: translateY(-8px) scale(1.02);
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2);
+    border: var(--event-card-hover-border);
+    box-shadow: var(--event-card-hover-shadow);
 }
 
 .cardContent {
@@ -53,7 +54,7 @@
 .cardTitle {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 
@@ -79,8 +80,8 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
+    background: var(--btn-register-bg);
+    color: var(--btn-register-color);
     border-radius: 8px;
     text-decoration: none;
     font-size: 0.9rem;
@@ -89,8 +90,8 @@
 }
 
 .registerBtn:hover {
-    background: var(--primary-glow);
-    color: #fff;
+    background: var(--btn-register-hover-bg);
+    color: var(--btn-register-hover-color);
 }
 
 /* Background gradient blob for hover effect */
@@ -124,26 +125,26 @@
 .archiveCard {
     opacity: 0.8;
     filter: grayscale(0.6);
-    background: rgba(15, 23, 42, 0.6);
-    border-color: rgba(255, 255, 255, 0.02);
+    background: var(--archive-card-bg);
+    border-color: var(--archive-card-border);
 }
 
 .archiveCard:hover {
     filter: grayscale(0);
     opacity: 1;
     transform: translateY(-4px) scale(1.01);
-    border-color: rgba(148, 163, 184, 0.3);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--archive-card-hover-border);
+    box-shadow: var(--archive-card-hover-shadow);
 }
 
 .archiveLabel {
     margin-top: auto;
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(148, 163, 184, 0.1);
-    color: #94a3b8;
+    background: var(--archive-label-bg);
+    color: var(--archive-label-color);
     border-radius: 6px;
     font-size: 0.85rem;
     font-family: var(--font-mono);
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    border: var(--archive-label-border);
 }

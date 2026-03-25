@@ -24,7 +24,7 @@ const ContactPage = () => {
         <div className="contact-page">
             <div className="contact-container">
                 <div className="contact-info">
-                    <h1>Let's Build the<br />Future Together</h1>
+                    <h1>Let's Build<br />Together</h1>
                     <p className="contact-desc">
                         Whether you're looking to sponsor our next improved hackathon,
                         collaborate on a workshop, or just want to say hi — we're always listening.

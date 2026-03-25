@@ -2,17 +2,33 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X, Code2, Sun, Moon, LogIn } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [theme, setTheme] = useState('light');
     const pathname = usePathname();
     const isDashboard = pathname?.startsWith('/dashboard') || pathname?.startsWith('/admin');
 
     const toggleMenu = () => setIsOpen(!isOpen);
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        setTheme(initialTheme);
+        document.documentElement.setAttribute('data-theme', initialTheme);
+    }, []);
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,12 +46,11 @@ const Navbar = () => {
     if (isDashboard) return null;
 
     const navLinks = [
-        { path: '/', label: 'Home' },
         { path: '/divisions', label: 'Divisions' },
-        { path: '/heads', label: 'Club Heads' },
         { path: '/events', label: 'Events' },
-        { path: '/connect', label: 'Recruitment' },
-        { path: '/achievements', label: 'Achievements' },
+        { path: '/achievements', label: 'Glory' },
+        { path: '/heads', label: 'Team' },
+        { path: '/connect', label: 'Join Us' },
     ];
 
     return (
@@ -49,8 +64,20 @@ const Navbar = () => {
                     </span>
                 </Link>
 
-                <div className={styles.menuIcon} onClick={toggleMenu}>
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
+                <div className={styles.navActions}>
+                    <Link href="/login" className={styles.loginBtn}>
+                        <LogIn size={18} />
+                        <span className={styles.loginText}>Member Login</span>
+                    </Link>
+                    <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle Theme">
+                        <div className={styles.themeToggleInner}>
+                            <Sun className={`${styles.themeIcon} ${theme === 'light' ? styles.themeIconActive : ''}`} size={24} />
+                            <Moon className={`${styles.themeIcon} ${theme === 'dark' ? styles.themeIconActive : ''}`} size={24} />
+                        </div>
+                    </button>
+                    <div className={styles.menuIcon} onClick={toggleMenu}>
+                        {isOpen ? <X size={28} /> : <Menu size={28} />}
+                    </div>
                 </div>
 
                 <ul className={`${styles.navMenu} ${isOpen ? styles.navMenuActive : ''}`}>

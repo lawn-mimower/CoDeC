@@ -28,6 +28,16 @@ export const divisions = [
 export const events = {
     upcoming: [
         {
+            id: 99,
+            name: 'CoDeC Ideathon 2026',
+            date: '2026-04-15',
+            time: '09:00 AM',
+            description: 'Our biggest campus Ideathon! Form a team and pitch your best ideas to solve real-world problems. (Click Register Now to test the new form!)',
+            venue: 'Main Auditorium',
+            category: 'Ideathon',
+            registrationLink: 'internal'
+        },
+        {
             id: 1,
             name: 'CoDeC Weekly Contest #42',
             date: '2026-02-01',

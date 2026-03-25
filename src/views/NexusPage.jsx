@@ -4,7 +4,7 @@ import styles from './NexusPage.module.css';
 
 const NexusPage = () => {
     // Club Recruitment Form URL
-    const recruitmentFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdXwZ4yW8kZ5t2z6xQ4yJ7g3J8k9l0mN1oP2qR3sT4uV5w/viewform?embedded=true";
+    const recruitmentFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLScIuc9Eim4yCe5m1FJRShovkf0AWtp-DxCGI3chbOWXEmq2Iw/viewform";
 
     return (
         <div className={styles.nexusContainer}>
@@ -15,7 +15,7 @@ const NexusPage = () => {
 
             <div className={styles.terminalContainer}>
                 <div className={styles.tabHeader}>
-                    <div className={styles.tabButton} style={{ color: '#fff', borderBottom: '2px solid var(--primary-glow)', textAlign: 'center' }}>
+                    <div className={styles.tabButton} style={{ color: 'var(--text-main)', borderBottom: '2px solid var(--primary-glow)', textAlign: 'center' }}>
                         Club Recruitment
                     </div>
                     <div className={styles.glitchLine}></div>

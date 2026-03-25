@@ -4,6 +4,15 @@ import { Trophy, Medal, Star, Target, Crown, Award, Code, Calendar } from 'lucid
 import { placements, flagshipEvents, clubGlory } from '../data/mockData';
 import './AchievementsPage.css';
 
+const formatDateToDDMMYYYY = (dateString) => {
+    if (!dateString) return '';
+    const parts = dateString.split('-');
+    if (parts.length === 3) {
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+    return dateString;
+};
+
 const AchievementsPage = () => {
     // Direct usage of mock data for this task
 
@@ -52,7 +61,7 @@ const AchievementsPage = () => {
                     {sortedEvents.map((item, index) => (
                         <div key={item.id} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
                             <div className="timeline-content glass-panel">
-                                <span className="achievement-date">[{item.date}]</span>
+                                <span className="achievement-date">[{formatDateToDDMMYYYY(item.date)}]</span>
                                 <h3 className="achievement-title">{item.name}</h3>
                                 <div className="event-stats">{item.stats}</div>
                                 <p className="achievement-desc">{item.description}</p>

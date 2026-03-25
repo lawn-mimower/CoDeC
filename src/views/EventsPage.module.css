@@ -3,7 +3,7 @@
     max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
-    background: var(--bg-dark);
+    background: var(--bg-primary);
 }
 
 .header {
@@ -15,7 +15,8 @@
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, #fff, #94a3b8);
+    background: var(--hero-title-bg);
+    filter: var(--hero-title-shadow);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -33,7 +34,7 @@
 
 .sectionTitle {
     font-size: 1.8rem;
-    color: var(--text-primary);
+    color: var(--text-main);
     margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
@@ -55,8 +56,9 @@
 }
 
 .card {
-    background: rgba(30, 41, 59, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--event-card-bg);
+    border: var(--event-card-border);
+    box-shadow: var(--event-card-shadow);
     border-radius: 16px;
     padding: 2rem;
     display: flex;
@@ -67,8 +69,8 @@
 }
 
 .card:hover {
-    background: rgba(30, 41, 59, 0.5);
-    border-color: rgba(59, 130, 246, 0.3);
+    border: var(--event-card-hover-border);
+    box-shadow: var(--event-card-hover-shadow);
     transform: translateX(10px);
 }
 
@@ -92,11 +94,11 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: rgba(15, 23, 42, 0.6);
+    background: var(--bg-card);
     border-radius: 12px;
     min-width: 120px;
     height: 120px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: var(--border-glass);
 }
 
 .dateBox span {
@@ -124,7 +126,7 @@
 .cardTitle {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 

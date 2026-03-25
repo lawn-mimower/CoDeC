@@ -1,30 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
 
 :root {
-  /* Core Palette - Cyberpunk Minimalist */
-  --bg-dark: #020617;
-  /* Slate 950 */
-  --bg-card: rgba(15, 23, 42, 0.6);
-  /* Slate 900 with opacity */
-  --bg-glass: rgba(2, 6, 23, 0.7);
+  /* Core Palette - Light Mode Default (Daylight Cyberpunk) */
+  --bg-primary: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.6);
+  --bg-glass: rgba(241, 245, 249, 0.7);
 
   --primary-glow: #3b82f6;
-  /* Blue 500 */
   --secondary-glow: #f59e0b;
-  /* Amber 500 */
   --accent-pink: #ec4899;
-  /* Pink 500 */
-  --accent-blue: #3b82f6;
-  --accent-orange: #f97316;
+  --accent-blue: #2563eb;
+  --accent-orange: #ea580c;
 
-  --text-primary: #f8fafc;
-  /* Slate 50 */
-  --text-secondary: #94a3b8;
-  /* Slate 400 */
+  --text-main: #0f172a;
+  --text-secondary: #475569;
 
   /* Gradients */
   --gradient-main: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
-  --gradient-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.0) 100%);
+  --gradient-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 100%);
 
   /* Fonts */
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -33,19 +26,156 @@
   /* Effects */
   --blur-md: 12px;
   --blur-lg: 20px;
+  --border-glass: 1px solid rgba(0, 0, 0, 0.1);
+  --shadow-primary: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* Component specific light mode variables */
+  --hero-title-bg: #0f172a;
+  --hero-title-shadow: none;
+
+  --footer-bg-end: #e2e8f0;
+  --footer-border: rgba(0, 0, 0, 0.05);
+
+  --token-keyword: var(--text-main);
+  --token-keyword-glow: none;
+  --token-entity: var(--accent-blue);
+  --token-entity-glow: none;
+  --token-variable: var(--text-main);
+  --token-variable-glow: none;
+  --token-string: var(--accent-orange);
+  --token-string-glow: none;
+
+  --nav-bg: rgba(255, 255, 255, 0.7);
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.85);
+  --nav-border: 1px solid rgba(0, 0, 0, 0.05);
+  --nav-link-color: #64748b;
+  --nav-link-hover: #1e293b;
+  --nav-icon-color: #1e293b;
+
+  --event-card-bg: #ffffff;
+  --event-card-border: 1px solid rgba(0, 0, 0, 0.05);
+  --event-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --event-card-hover-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --event-card-hover-border: 1px solid rgba(37, 99, 235, 0.4);
+  --event-header-bg: #0f172a;
+
+  --btn-register-bg: rgba(37, 99, 235, 0.1);
+  --btn-register-color: var(--accent-blue);
+  --btn-register-hover-bg: var(--accent-blue);
+  --btn-register-hover-color: #fff;
+
+  --btn-outline-border: 1px solid rgba(0, 0, 0, 0.2);
+  --btn-outline-hover-bg: rgba(0, 0, 0, 0.05);
+
+  --archive-card-bg: rgba(241, 245, 249, 0.7);
+  --archive-card-border: rgba(0, 0, 0, 0.05);
+  --archive-card-hover-border: rgba(0, 0, 0, 0.1);
+  --archive-card-hover-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  --archive-label-bg: rgba(0, 0, 0, 0.05);
+  --archive-label-color: var(--text-secondary);
+  --archive-label-border: 1px solid rgba(0, 0, 0, 0.1);
+
+  --div-card-bg: rgba(255, 255, 255, 0.7);
+  --div-card-border: 1px solid rgba(0, 0, 0, 0.05);
+  --div-card-hover-bg: rgba(255, 255, 255, 1);
+  --div-card-hover-border: rgba(37, 99, 235, 0.3);
+  --div-card-hover-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(37, 99, 235, 0.05);
+
+  --div-tag-bg: rgba(0, 0, 0, 0.03);
+  --div-tag-border: rgba(0, 0, 0, 0.05);
+  --div-tag-hover-bg: rgba(0, 0, 0, 0.08);
+  --div-tag-hover-border: rgba(0, 0, 0, 0.15);
+
+  --div-details-border: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] {
+  /* Dark Mode Overrides (Cyberpunk Minimalist) */
+  --bg-primary: #020617;
+  --bg-card: rgba(15, 23, 42, 0.6);
+  --bg-glass: rgba(2, 6, 23, 0.7);
+
+  --accent-blue: #3b82f6;
+  --accent-orange: #f97316;
+
+  --text-main: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  --gradient-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.0) 100%);
   --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+  --shadow-primary: 0 0 20px rgba(59, 130, 246, 0.2);
+
+  /* Component specific dark mode overrides */
+  --hero-title-bg: linear-gradient(to right, #ffffff, #94a3b8);
+  --hero-title-shadow: drop-shadow(0 0 30px rgba(59, 130, 246, 0.3));
+
+  --footer-bg-end: #0f172a;
+  --footer-border: rgba(255, 255, 255, 0.05);
+
+  --token-keyword: var(--accent-pink);
+  --token-keyword-glow: 0 0 10px rgba(236, 72, 153, 0.3);
+  --token-entity: var(--primary-glow);
+  --token-entity-glow: 0 0 10px rgba(59, 130, 246, 0.3);
+  --token-variable: var(--secondary-glow);
+  --token-variable-glow: 0 0 10px rgba(245, 158, 11, 0.3);
+  --token-string: #10b981;
+  --token-string-glow: 0 0 10px rgba(16, 185, 129, 0.3);
+
+  --nav-bg: rgba(2, 6, 23, 0.65);
+  --nav-bg-scrolled: rgba(2, 6, 23, 0.85);
+  --nav-border: 1px solid rgba(255, 255, 255, 0.08);
+  --nav-link-color: var(--text-secondary);
+  --nav-link-hover: var(--text-main);
+  --nav-icon-color: var(--text-main);
+
+  --event-card-bg: rgba(30, 41, 59, 0.4);
+  --event-card-border: 1px solid rgba(255, 255, 255, 0.05);
+  --event-card-shadow: none;
+  --event-card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2);
+  --event-card-hover-border: rgba(59, 130, 246, 0.5);
+  --event-header-bg: linear-gradient(to right, #fff, #94a3b8);
+
+  --btn-register-bg: rgba(255, 255, 255, 0.05);
+  --btn-register-color: var(--text-main);
+  --btn-register-hover-bg: var(--primary-glow);
+  --btn-register-hover-color: #fff;
+
+  --btn-outline-border: 1px solid rgba(255, 255, 255, 0.1);
+  --btn-outline-hover-bg: rgba(255, 255, 255, 0.05);
+
+  --archive-card-bg: rgba(15, 23, 42, 0.6);
+  --archive-card-border: rgba(255, 255, 255, 0.02);
+  --archive-card-hover-border: rgba(148, 163, 184, 0.3);
+  --archive-card-hover-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  --archive-label-bg: rgba(148, 163, 184, 0.1);
+  --archive-label-color: #94a3b8;
+  --archive-label-border: 1px solid rgba(148, 163, 184, 0.2);
+
+  --div-card-bg: rgba(30, 41, 59, 0.4);
+  --div-card-border: 1px solid rgba(255, 255, 255, 0.05);
+  --div-card-hover-bg: rgba(30, 41, 59, 0.6);
+  --div-card-hover-border: rgba(59, 130, 246, 0.3);
+  --div-card-hover-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1);
+
+  --div-tag-bg: rgba(255, 255, 255, 0.03);
+  --div-tag-border: rgba(255, 255, 255, 0.05);
+  --div-tag-hover-bg: rgba(255, 255, 255, 0.05);
+  --div-tag-hover-border: rgba(255, 255, 255, 0.2);
+
+  --div-details-border: rgba(255, 255, 255, 0.05);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 body {
   font-family: var(--font-sans);
-  background: var(--bg-dark);
-  color: var(--text-primary);
+  background: var(--bg-primary);
+  color: var(--text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
@@ -62,7 +192,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {

@@ -23,11 +23,11 @@
     line-height: 1.1;
     letter-spacing: -0.04em;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, #ffffff, #94a3b8);
-    -webkit-background-clip: text;
+    background: var(--hero-title-bg);
     background-clip: text;
+    -webkit-background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.3));
+    filter: var(--hero-title-shadow);
 }
 
 .tagline {
@@ -38,28 +38,27 @@
 }
 
 .syntaxKeyword {
-    color: var(--accent-pink);
-    text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+    color: var(--token-keyword);
+    text-shadow: var(--token-keyword-glow);
 }
 
 .syntaxEntity {
-    color: var(--primary-glow);
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    color: var(--token-entity);
+    text-shadow: var(--token-entity-glow);
 }
 
 .syntaxVariable {
-    color: var(--secondary-glow);
-    text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    color: var(--token-variable);
+    text-shadow: var(--token-variable-glow);
 }
 
 .syntaxString {
-    color: #10b981;
-    /* Emerald 500 */
-    text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    color: var(--token-string);
+    text-shadow: var(--token-string-glow);
 }
 
 .syntaxPlain {
-    color: var(--text-primary);
+    color: var(--text-main);
 }
 
 .cursor {
@@ -89,7 +88,7 @@
 
 .stealthTrigger:hover {
     text-shadow: 0 0 8px var(--accent-pink);
-    color: var(--text-primary);
+    color: var(--text-main);
 }
 
 .ctaGroup {
@@ -138,21 +137,21 @@
 .primaryBtn:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-    background: rgba(59, 130, 246, 0.2);
-    color: #fff;
+    background: var(--btn-register-hover-bg);
+    color: var(--btn-register-hover-color);
 }
 
 .secondaryBtn {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: var(--btn-outline-border);
     color: var(--text-secondary);
 }
 
 .secondaryBtn:hover {
-    border-color: var(--text-primary);
-    color: var(--text-primary);
+    border-color: var(--text-main);
+    color: var(--text-main);
     transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--btn-outline-hover-bg);
 }
 
 /* Background Effects */

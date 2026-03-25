@@ -3,7 +3,7 @@
     max-width: 1400px;
     margin: 0 auto;
     min-height: 100vh;
-    background: var(--bg-dark);
+    background: var(--bg-primary);
 }
 
 .header {
@@ -16,7 +16,8 @@
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, #fff, #94a3b8);
+    background: var(--hero-title-bg);
+    filter: var(--hero-title-shadow);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -37,8 +38,8 @@
 }
 
 .card {
-    background: rgba(30, 41, 59, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--div-card-bg);
+    border: var(--div-card-border);
     border-radius: 20px;
     padding: 2.5rem;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -51,9 +52,9 @@
 
 .card:hover {
     transform: translateY(-10px);
-    background: rgba(30, 41, 59, 0.6);
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1);
+    background: var(--div-card-hover-bg);
+    border-color: var(--div-card-hover-border);
+    box-shadow: var(--div-card-hover-shadow);
 }
 
 .iconWrapper {
@@ -79,7 +80,7 @@
 .cardTitle {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--text-main);
     margin-bottom: 1rem;
     font-family: var(--font-mono);
 }
@@ -92,7 +93,7 @@
 }
 
 .details {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--div-details-border);
     padding-top: 1.5rem;
     margin-top: auto;
 }
@@ -114,20 +115,20 @@
 }
 
 .tag {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--div-tag-bg);
     color: var(--text-secondary);
     padding: 6px 12px;
     border-radius: 8px;
     font-size: 0.85rem;
     font-family: var(--font-mono);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--div-tag-border);
     transition: all 0.3s ease;
 }
 
 .card:hover .tag {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
+    border-color: var(--div-tag-hover-border);
+    background: var(--div-tag-hover-bg);
+    color: var(--text-main);
 }
 
 @media (max-width: 768px) {

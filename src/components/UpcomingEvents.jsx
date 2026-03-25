@@ -2,28 +2,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Calendar, ExternalLink, LogIn, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
-import { createClient } from '../utils/supabase/client';
-import { registerForEvent } from './actions';
+import EventRegistrationModal from './EventRegistrationModal';
 import styles from './UpcomingEvents.module.css';
 
 const UpcomingEvents = ({ events }) => {
-    const [user, setUser] = useState(null);
-    const [registering, setRegistering] = useState({});
-    const router = useRouter();
-    const supabase = createClient();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     // Split events into upcoming and past (archive)
     const upcoming = (events?.upcoming || []).slice(0, 3);
     const archive = (events?.past || []).slice(0, 6); // Show last 6 archived events
-
-    useEffect(() => {
-        const getUser = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-            setUser(user);
-        };
-        getUser();
-    }, []);
 
     // Mouse move effect for card glow
     const handleMouseMove = (e) => {
@@ -41,30 +29,6 @@ const UpcomingEvents = ({ events }) => {
         if (!dateStr) return '';
         const d = new Date(dateStr);
         return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-    };
-
-    const handleRegister = async (eventId, e) => {
-        e.preventDefault();
-
-        if (!user) {
-            router.push('/login');
-            return;
-        }
-
-        setRegistering(prev => ({ ...prev, [eventId]: true }));
-        try {
-            const result = await registerForEvent(eventId);
-            if (result.success) {
-                alert(result.message);
-            } else {
-                alert("Registration Failed: " + result.message);
-            }
-        } catch (error) {
-            console.error("Registration error:", error);
-            alert("An unexpected error occurred.");
-        } finally {
-            setRegistering(prev => ({ ...prev, [eventId]: false }));
-        }
     };
 
     // Helper to render an event card
@@ -88,13 +52,14 @@ const UpcomingEvents = ({ events }) => {
 
                 {!isArchive && (
                     <button
-                        onClick={(e) => user ? handleRegister(event.id, e) : router.push('/login')}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSelectedEvent(event);
+                            setIsModalOpen(true);
+                        }}
                         className={styles.registerBtn}
-                        disabled={user && registering[event.id]}
                     >
-                        {user && registering[event.id] ? 'Registering...' : 'Register'}
-                        {/* Only show icon if NOT registering */}
-                        {!registering[event.id] && (user ? <CheckCircle size={14} /> : <LogIn size={14} />)}
+                        Register
                     </button>
                 )}
 
@@ -143,6 +108,12 @@ const UpcomingEvents = ({ events }) => {
                     </div>
                 </>
             )}
+
+            <EventRegistrationModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                event={selectedEvent} 
+            />
         </section>
     );
 };
