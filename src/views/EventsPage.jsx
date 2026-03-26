@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Activity, History, Repeat, Trash2, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { EventManager } from '../utils/EventManager';
-import EventRegistrationModal from '../components/EventRegistrationModal';
+import EventDetailModal from '../components/EventDetailModal';
 import SectionHeader from '../components/SectionHeader';
 import GlassCard from '../components/GlassCard';
 import styles from './EventsPage.module.css';
@@ -19,8 +19,8 @@ const formatDateToDDMMYYYY = (dateString) => {
 
 const EventsPage = () => {
     const [eventsData, setEventsData] = useState({ upcoming: [], past: [] });
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [isDetailOpen, setIsDetailOpen] = useState(false);
+    const [detailEvent, setDetailEvent] = useState(null);
 
     useEffect(() => {
         // Fetch events on mount
@@ -33,7 +33,7 @@ const EventsPage = () => {
     }, []);
 
     const handleDelete = async (id) => {
-        if (window.confirm('Confirm Deletion Protocol? This action is irreversible.')) {
+        if (window.confirm('Delete this event? This action is irreversible.')) {
             try {
                 const updated = await EventManager.deleteEvent(id);
                 if (updated) setEventsData(updated);
@@ -55,7 +55,7 @@ const EventsPage = () => {
             />
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}><Activity style={{ color: 'var(--accent-blue)' }} /> Active Operations</h2>
+                <h2 className={styles.sectionTitle}><Activity style={{ color: 'var(--accent-blue)' }} /> Upcoming Events</h2>
                 {/* Debug Log */}
                 <div style={{ display: 'none' }}>{console.log('EventsPage Data:', eventsData)}</div>
 
@@ -126,9 +126,9 @@ const EventsPage = () => {
                                             <div className={styles.actions}>
                                                 <button
                                                     className={styles.registerBtn}
-                                                    onClick={() => { setSelectedEvent(event); setIsModalOpen(true); }}
+                                                    onClick={() => { setDetailEvent(event); setIsDetailOpen(true); }}
                                                 >
-                                                    Register Now
+                                                    Learn More
                                                 </button>
                                             </div>
                                         </div>
@@ -137,13 +137,13 @@ const EventsPage = () => {
                             </motion.div>
                         ))
                     ) : (
-                        <p className={styles.emptyState}>No active operations detected.</p>
+                        <p className={styles.emptyState}>No upcoming events yet.</p>
                     )}
                 </div>
             </section>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}><History style={{ color: 'var(--text-secondary)' }} /> Mission Archive</h2>
+                <h2 className={styles.sectionTitle}><History style={{ color: 'var(--text-secondary)' }} /> Past Events</h2>
                 <div className={styles.list}>
                     {eventsData.past.map(event => (
                         <motion.div
@@ -166,7 +166,7 @@ const EventsPage = () => {
                                         <p className={styles.description}>{event.description}</p>
                                         <div className={styles.actions}>
                                             <button className={styles.registerBtn} disabled>
-                                                Registration Closed
+                                                View Details
                                             </button>
                                         </div>
                                     </div>
@@ -177,10 +177,10 @@ const EventsPage = () => {
                 </div>
             </section>
 
-            <EventRegistrationModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                event={selectedEvent}
+            <EventDetailModal
+                isOpen={isDetailOpen}
+                onClose={() => setIsDetailOpen(false)}
+                event={detailEvent}
             />
         </div>
     );
