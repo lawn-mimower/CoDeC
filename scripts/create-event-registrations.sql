@@ -1,7 +1,7 @@
 -- scripts/create-event-registrations.sql
 create table if not exists public.event_registrations (
   id uuid primary key default gen_random_uuid(),
-  event_id uuid references public.events(id) on delete cascade,
+  event_id uuid not null references public.events(id) on delete cascade,
   name text not null,
   email text not null,
   phone text not null,
