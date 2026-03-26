@@ -1,193 +1,185 @@
-.modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
+/* src/components/EventRegistrationModal.module.css */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-.modalContent {
-    background: var(--bg-card);
-    border: var(--border-glass);
-    border-radius: 16px;
-    width: 90%;
-    max-width: 500px;
-    padding: 2.5rem;
-    position: relative;
-    box-shadow: var(--shadow-primary);
-    animation: slideUp 0.3s ease;
-    max-height: 90vh;
-    overflow-y: auto;
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  position: relative;
+  backdrop-filter: blur(12px);
 }
 
 .closeBtn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: color 0.2s;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--bg-card-tint);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  padding: 0.35rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, border-color 0.2s;
 }
 
-.closeBtn:hover {
-    color: var(--text-main);
-}
+.closeBtn:hover { color: var(--text-main); border-color: var(--border-card-hover); }
 
 .modalHeader {
-    margin-bottom: 2rem;
-    border-bottom: var(--border-glass);
-    padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  padding-right: 2.5rem;
 }
 
-.modalHeader h2 {
-    color: var(--text-main);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    font-family: var(--font-mono);
-}
-
-.headerIcon {
-    color: var(--accent-orange);
+.eventLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .eventName {
-    color: var(--primary-glow);
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
-    font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
 }
 
-.registrationForm {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+.eventMeta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .formRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .inputGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-.inputGroup label {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-family: var(--font-mono);
-    text-transform: uppercase;
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
 }
 
-.inputField {
-    background: var(--bg-primary);
-    border: var(--border-glass);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    color: var(--text-main);
-    font-family: var(--font-sans);
-    transition: all 0.3s ease;
+.input {
+  background: var(--bg-card-tint);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
 }
 
-.inputField:focus {
-    outline: none;
-    border-color: var(--accent-blue);
-    background: var(--bg-card);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
-}
-
-/* Custom dropdown icon for selects */
-select.inputField {
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1.1em;
-    cursor: pointer;
-}
-
-select.inputField option {
-    background-color: var(--bg-primary);
-    color: var(--text-main);
-    font-family: var(--font-mono);
-    padding: 10px;
-    font-weight: 500;
-}
+.input:focus { border-color: var(--brand-blue); }
 
 .submitBtn {
-    margin-top: 1rem;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-orange));
-    color: white;
-    border: none;
-    padding: 1rem;
-    border-radius: 8px;
-    font-weight: 700;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background: var(--gradient-brand-deep);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.submitBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
+.submitBtn:hover { opacity: 0.88; }
+.submitBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.spinner {
+  animation: spin 0.8s linear infinite;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.errorMsg {
+  font-size: 0.85rem;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
 }
 
-@media (max-width: 600px) {
-    .formRow {
-        grid-template-columns: 1fr;
-    }
+.iframeWrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-card);
+}
+
+.googleFrame {
+  display: block;
 }
 
 .successState {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 3rem 1rem;
-    gap: 1rem;
+  text-align: center;
+  padding: 2rem 1rem;
 }
 
 .successIcon {
-    color: var(--accent-blue);
-    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
-    margin-bottom: 0.5rem;
+  color: #22c55e;
+  margin-bottom: 1rem;
 }
 
 .successTitle {
-    color: var(--text-main);
-    font-size: 1.5rem;
-    font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
 }
 
 .successDesc {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.6;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
