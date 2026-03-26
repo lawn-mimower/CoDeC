@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { Trophy } from 'lucide-react';
-import { clubGlory } from '../data/mockData';
+import { clubGlory, placements } from '../data/mockData';
 import styles from './AchievementsPage.module.css';
 import SectionHeader from '../components/SectionHeader';
 import GlassCard from '../components/GlassCard';
@@ -18,6 +18,17 @@ const AchievementsPage = () => {
                         <div className={styles.cardTitle}>{achievement.title}</div>
                         <div className={styles.cardDesc}>{achievement.description}</div>
                         <span className={styles.tag}>{achievement.metric}</span>
+                    </GlassCard>
+                ))}
+            </div>
+
+            <SectionHeader label="// Placements" heading="Our Placement Wall" gradientWord="Placement" />
+            <div className={styles.placementGrid}>
+                {placements.map((p, i) => (
+                    <GlassCard key={i} className={styles.placementCard}>
+                        <span className={styles.company}>{p.company}</span>
+                        <div className={styles.studentName}>{p.name}</div>
+                        <div className={styles.package}>{p.package}</div>
                     </GlassCard>
                 ))}
             </div>
