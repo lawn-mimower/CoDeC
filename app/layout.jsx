@@ -3,7 +3,6 @@ import Navbar from '../src/components/Navbar';
 import Footer from '../src/components/Footer';
 import './globals.css';
 import '../src/views/LandingPage.css';
-import '../src/views/ClubHeadsPage.css';
 import '../src/views/AchievementsPage.css';
 import '../src/views/LoginPage.css';
 
