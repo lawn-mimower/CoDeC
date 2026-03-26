@@ -89,15 +89,12 @@ const Hero = ({ onActivateProtocol }) => {
                     transition={{ delay: 1.5, duration: 0.8 }}
                 >
                     Community of Developers and Coders
-                    <span
+                    <Link
+                        href="/login"
                         className={styles.stealthTrigger}
-                        onClick={onActivateProtocol}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => e.key === 'Enter' && onActivateProtocol()}
                     >
                         (CoDeC)
-                    </span>{' '}
+                    </Link>{' '}
                     is the premier technical club fostering innovation and technical excellence.
                 </motion.p>
 

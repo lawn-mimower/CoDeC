@@ -50,7 +50,7 @@ const Navbar = () => {
         { path: '/events', label: 'Events' },
         { path: '/achievements', label: 'Glory' },
         { path: '/heads', label: 'Team' },
-        { path: '/connect', label: 'Join Us' },
+        { path: '/connect', label: 'Join Us', highlight: true },
     ];
 
     return (
@@ -64,41 +64,39 @@ const Navbar = () => {
                     </span>
                 </Link>
 
-                <div className={styles.navActions}>
-                    <Link href="/login" className={styles.loginBtn}>
-                        <LogIn size={18} />
-                        <span className={styles.loginText}>Member Login</span>
-                    </Link>
-                    <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle Theme">
-                        <div className={styles.themeToggleInner}>
-                            <Sun className={`${styles.themeIcon} ${theme === 'light' ? styles.themeIconActive : ''}`} size={24} />
-                            <Moon className={`${styles.themeIcon} ${theme === 'dark' ? styles.themeIconActive : ''}`} size={24} />
+                <div className={styles.navRightContainer}>
+                    <ul className={`${styles.navMenu} ${isOpen ? styles.navMenuActive : ''}`}>
+                        {navLinks.map((link) => (
+                            <li key={link.path} className={styles.navItem}>
+                                <Link
+                                    href={link.path}
+                                    className={`${styles.navLink} ${pathname === link.path ? styles.navLinkActive : ''} ${link.highlight ? styles.navLinkHighlight : ''}`}
+                                >
+                                    {link.label}
+                                    {pathname === link.path && (
+                                        <motion.div
+                                            className={styles.activeDot}
+                                            layoutId="activeTab"
+                                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                        />
+                                    )}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    
+                    <div className={styles.navActions}>
+                        <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle Theme">
+                            <div className={styles.themeToggleInner}>
+                                <Sun className={`${styles.themeIcon} ${theme === 'light' ? styles.themeIconActive : ''}`} size={24} />
+                                <Moon className={`${styles.themeIcon} ${theme === 'dark' ? styles.themeIconActive : ''}`} size={24} />
+                            </div>
+                        </button>
+                        <div className={styles.menuIcon} onClick={toggleMenu}>
+                            {isOpen ? <X size={28} /> : <Menu size={28} />}
                         </div>
-                    </button>
-                    <div className={styles.menuIcon} onClick={toggleMenu}>
-                        {isOpen ? <X size={28} /> : <Menu size={28} />}
                     </div>
                 </div>
-
-                <ul className={`${styles.navMenu} ${isOpen ? styles.navMenuActive : ''}`}>
-                    {navLinks.map((link) => (
-                        <li key={link.path} className={styles.navItem}>
-                            <Link
-                                href={link.path}
-                                className={`${styles.navLink} ${pathname === link.path ? styles.navLinkActive : ''}`}
-                            >
-                                {link.label}
-                                {pathname === link.path && (
-                                    <motion.div
-                                        className={styles.activeDot}
-                                        layoutId="activeTab"
-                                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    />
-                                )}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
             </div>
         </nav>
     );

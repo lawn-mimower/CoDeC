@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Target, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { createClient } from '../utils/supabase/client';
 import styles from './EventRegistrationModal.module.css';
 
 const EventRegistrationModal = ({ isOpen, onClose, event }) => {
@@ -20,22 +21,47 @@ const EventRegistrationModal = ({ isOpen, onClose, event }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Frontend only
-        setIsSubmitted(true);
-        setTimeout(() => {
-            onClose();
-            setIsSubmitted(false);
-            setFormData({
-                fullName: '',
-                email: '',
-                phone: '',
-                prn: '',
-                branch: '',
-                year: ''
-            });
-        }, 3000);
+        
+        const supabase = createClient();
+        
+        try {
+            const { error } = await supabase
+                .from('public_event_registrations')
+                .insert([{
+                    event_id: event.id,
+                    full_name: formData.fullName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    prn: formData.prn,
+                    department: formData.branch,
+                    year_of_study: formData.year
+                }]);
+                
+            if (error) {
+                console.error("Error inserting registration:", error);
+                alert("Failed to register. Please try again.");
+                return;
+            }
+            
+            setIsSubmitted(true);
+            setTimeout(() => {
+                onClose();
+                setIsSubmitted(false);
+                setFormData({
+                    fullName: '',
+                    email: '',
+                    phone: '',
+                    prn: '',
+                    branch: '',
+                    year: ''
+                });
+            }, 3000);
+        } catch (err) {
+            console.error("Unexpected error:", err);
+            alert("An unexpected error occurred.");
+        }
     };
 
     return (
@@ -65,7 +91,7 @@ const EventRegistrationModal = ({ isOpen, onClose, event }) => {
                 ) : (
                     <>
                         <div className={styles.modalHeader}>
-                            <h2><Target className={styles.headerIcon} /> Operation Sign-Up</h2>
+                            <h2><Target className={styles.headerIcon} /> Event Sign-Up</h2>
                             <p className={styles.eventName}>{event.name}</p>
                         </div>
 

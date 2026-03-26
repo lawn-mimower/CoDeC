@@ -64,7 +64,7 @@ const UpcomingEvents = ({ events }) => {
                 )}
 
                 {isArchive && (
-                    <div className={styles.archiveLabel}>Mission Concluded</div>
+                    <div className={styles.archiveLabel}>Event Concluded</div>
                 )}
             </div>
         </motion.article>
@@ -80,7 +80,7 @@ const UpcomingEvents = ({ events }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
             >
-                Upcoming Operations
+                Upcoming Events
             </motion.h2>
 
             {upcoming.length > 0 ? (
@@ -88,7 +88,7 @@ const UpcomingEvents = ({ events }) => {
                     {upcoming.map((event, index) => renderEventCard(event, index, false))}
                 </div>
             ) : (
-                <div className={styles.emptyState}>No operations currently active. Standby.</div>
+                <div className={styles.emptyState}>No events currently active. Standby.</div>
             )}
 
             {/* Mission Archive Section */}
@@ -101,7 +101,7 @@ const UpcomingEvents = ({ events }) => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        Mission Archive
+                        Past Events
                     </motion.h2>
                     <div className={styles.grid}>
                         {archive.map((event, index) => renderEventCard(event, index, true))}

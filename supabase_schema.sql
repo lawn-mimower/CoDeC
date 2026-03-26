@@ -326,3 +326,35 @@ ALTER TABLE public.event_registrations ALTER COLUMN status SET DEFAULT 'confirme
 -- 4. Confirmation
 -- Bucket 'club-assets' remains PUBLIC as requested for website assets.
 -- No change needed there.
+
+-- 5. Public Event Registrations (No Auth Required)
+CREATE TABLE IF NOT EXISTS public.public_event_registrations (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  event_id bigint REFERENCES public.events(id) ON DELETE CASCADE,
+  full_name text NOT NULL,
+  email text NOT NULL,
+  phone text NOT NULL,
+  prn text NOT NULL,
+  department text NOT NULL,
+  year_of_study text NOT NULL,
+  registered_at timestamptz DEFAULT now()
+);
+
+-- Enable RLS for public_event_registrations
+ALTER TABLE public.public_event_registrations ENABLE ROW LEVEL SECURITY;
+
+-- Allow anyone to insert (public form)
+CREATE POLICY "Enable insert for anonymous users" 
+ON public.public_event_registrations FOR INSERT 
+WITH CHECK (true);
+
+-- Allow admins/heads to select
+CREATE POLICY "Enable select for admins" 
+ON public.public_event_registrations FOR SELECT 
+USING (
+  EXISTS (
+    SELECT 1 FROM public.members 
+    WHERE user_id = auth.uid() 
+      AND (is_head = true OR role IN ('admin', 'super_admin'))
+  )
+);

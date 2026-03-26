@@ -52,7 +52,7 @@ const EventsPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    Event Log
+                    Events
                 </motion.h1>
                 <motion.p
                     className={styles.subtitle}
@@ -65,7 +65,7 @@ const EventsPage = () => {
             </div>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}><Activity style={{ color: 'var(--accent-blue)' }} /> Active Operations</h2>
+                <h2 className={styles.sectionTitle}><Activity style={{ color: 'var(--accent-blue)' }} /> Active Events</h2>
                 {/* Debug Log */}
                 <div style={{ display: 'none' }}>{console.log('EventsPage Data:', eventsData)}</div>
 
@@ -91,7 +91,7 @@ const EventsPage = () => {
                                         <div style={{ fontSize: '0.7em', marginTop: '4px', opacity: 0.6, textTransform: 'uppercase' }}>All Day</div>
                                     )}
                                     {event.recurrence && event.recurrence !== 'none' && (
-                                        <div style={{ marginTop: '8px', color: 'var(--accent-orange)' }} title="Recurring Mission">
+                                        <div style={{ marginTop: '8px', color: 'var(--accent-orange)' }} title="Recurring Event">
                                             <Repeat size={16} />
                                         </div>
                                     )}
@@ -164,13 +164,13 @@ const EventsPage = () => {
                             </motion.div>
                         ))
                     ) : (
-                        <p className={styles.emptyState}>No active operations detected.</p>
+                        <p className={styles.emptyState}>No active events detected.</p>
                     )}
                 </div>
             </section>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}><History style={{ color: 'var(--text-secondary)' }} /> Mission Archive</h2>
+                <h2 className={styles.sectionTitle}><History style={{ color: 'var(--text-secondary)' }} /> Past Events</h2>
                 <div className={styles.list}>
                     {eventsData.past.map(event => (
                         <div key={event.id} className={`${styles.card} ${styles.pastCard}`}>

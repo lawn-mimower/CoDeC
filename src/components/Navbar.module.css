@@ -27,6 +27,12 @@
     align-items: center;
 }
 
+.navRightContainer {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -142,6 +148,17 @@
 .navLink:hover,
 .navLinkActive {
     color: var(--nav-link-hover);
+}
+
+.navLinkHighlight {
+    color: #fef08a !important; /* Tailwind yellow-200 */
+    text-shadow: 0 0 10px rgba(254, 240, 138, 0.4);
+    font-weight: 600;
+}
+
+.navLinkHighlight:hover {
+    color: #fde047 !important; /* Tailwind yellow-300 */
+    text-shadow: 0 0 12px rgba(253, 224, 71, 0.6);
 }
 
 .activeDot {
