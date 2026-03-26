@@ -1,6 +1,6 @@
 // src/components/EventRegistrationModal.jsx
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { registerForEvent } from './actions';
@@ -15,6 +15,13 @@ const EventRegistrationModal = ({ isOpen, onClose, event }) => {
   });
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    if (isOpen) {
+      setStatus('idle');
+      setErrorMsg('');
+    }
+  }, [isOpen]);
 
   if (!isOpen || !event) return null;
 
@@ -89,46 +96,52 @@ const EventRegistrationModal = ({ isOpen, onClose, event }) => {
 
                 {isGoogleForm ? (
                   <div className={styles.iframeWrapper}>
-                    <iframe
-                      src={googleFormUrl}
-                      width="100%"
-                      height="520"
-                      frameBorder="0"
-                      title="Registration Form"
-                      className={styles.googleFrame}
-                      onLoad={e => e.target.style.opacity = 1}
-                      style={{ opacity: 0, transition: 'opacity 0.3s ease' }}
-                    />
+                    {/^https:\/\/(docs\.google\.com\/forms\/|forms\.gle\/)/.test(googleFormUrl) ? (
+                      <iframe
+                        src={googleFormUrl}
+                        width="100%"
+                        height="520"
+                        frameBorder="0"
+                        title="Registration Form"
+                        className={styles.googleFrame}
+                        onLoad={e => e.target.style.opacity = 1}
+                        style={{ opacity: 0, transition: 'opacity 0.3s ease' }}
+                      />
+                    ) : (
+                      <p style={{ padding: '2rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                        Registration form unavailable. Please contact the organizers.
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.inputGroup}>
-                      <label className={styles.label}>Full Name</label>
-                      <input className={styles.input} name="fullName" value={formData.fullName} onChange={handleChange} required />
+                      <label className={styles.label} htmlFor="reg-fullName">Full Name</label>
+                      <input className={styles.input} id="reg-fullName" name="fullName" value={formData.fullName} onChange={handleChange} required />
                     </div>
                     <div className={styles.inputGroup}>
-                      <label className={styles.label}>College Email</label>
-                      <input className={styles.input} type="email" name="email" value={formData.email} onChange={handleChange} required />
+                      <label className={styles.label} htmlFor="reg-email">College Email</label>
+                      <input className={styles.input} id="reg-email" type="email" name="email" value={formData.email} onChange={handleChange} required />
                     </div>
                     <div className={styles.inputGroup}>
-                      <label className={styles.label}>Phone Number</label>
-                      <input className={styles.input} type="tel" name="phone" value={formData.phone} onChange={handleChange} required />
+                      <label className={styles.label} htmlFor="reg-phone">Phone Number</label>
+                      <input className={styles.input} id="reg-phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} required />
                     </div>
                     <div className={styles.inputGroup}>
-                      <label className={styles.label}>PRN / Student ID</label>
-                      <input className={styles.input} name="prn" value={formData.prn} onChange={handleChange} required />
+                      <label className={styles.label} htmlFor="reg-prn">PRN / Student ID</label>
+                      <input className={styles.input} id="reg-prn" name="prn" value={formData.prn} onChange={handleChange} required />
                     </div>
                     <div className={styles.formRow}>
                       <div className={styles.inputGroup}>
-                        <label className={styles.label}>Branch</label>
-                        <select className={styles.input} name="branch" value={formData.branch} onChange={handleChange} required>
+                        <label className={styles.label} htmlFor="reg-branch">Branch</label>
+                        <select className={styles.input} id="reg-branch" name="branch" value={formData.branch} onChange={handleChange} required>
                           <option value="" disabled>Select Branch</option>
                           {BRANCHES.map(b => <option key={b} value={b}>{b}</option>)}
                         </select>
                       </div>
                       <div className={styles.inputGroup}>
-                        <label className={styles.label}>Year</label>
-                        <select className={styles.input} name="year" value={formData.year} onChange={handleChange} required>
+                        <label className={styles.label} htmlFor="reg-year">Year</label>
+                        <select className={styles.input} id="reg-year" name="year" value={formData.year} onChange={handleChange} required>
                           <option value="" disabled>Select Year</option>
                           {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
                         </select>
