@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, MapPin, Clock, Users, CalendarCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EventRegistrationModal from './EventRegistrationModal';
@@ -7,6 +7,15 @@ import styles from './EventDetailModal.module.css';
 
 const EventDetailModal = ({ isOpen, onClose, event }) => {
   const [regOpen, setRegOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
   if (!isOpen || !event) return null;
 
