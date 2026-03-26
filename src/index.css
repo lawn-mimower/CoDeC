@@ -47,6 +47,54 @@
   /* Footer */
   --footer-bg-end: #e8eef8;
   --footer-border: rgba(74, 143, 224, 0.1);
+
+  /* ─── Legacy forwarding aliases (remove as Phase B reskins each component) ─── */
+  --blur-md: 12px;
+  --blur-lg: 20px;
+  --shadow-primary: 0 4px 16px rgba(74, 143, 224, 0.12);
+  --accent-pink: #F5C542;
+  --accent-orange: #F5C542;
+  --hero-title-bg: var(--text-main);
+  --hero-title-shadow: none;
+  --gradient-main: var(--gradient-hero);
+  --gradient-glass: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 100%);
+  --event-card-bg: var(--bg-card);
+  --event-card-border: 1px solid var(--border-card);
+  --event-card-shadow: var(--shadow-card);
+  --event-card-hover-shadow: var(--shadow-card-hover);
+  --event-card-hover-border: 1px solid var(--border-card-hover);
+  --event-header-bg: var(--text-main);
+  --btn-register-bg: rgba(74, 143, 224, 0.1);
+  --btn-register-color: var(--brand-blue);
+  --btn-register-hover-bg: var(--brand-blue);
+  --btn-register-hover-color: #fff;
+  --btn-outline-border: 1px solid var(--border-card);
+  --btn-outline-hover-bg: var(--bg-card-tint);
+  --archive-card-bg: var(--bg-card-tint);
+  --archive-card-border: var(--border-card);
+  --archive-card-hover-border: var(--border-card-hover);
+  --archive-card-hover-shadow: var(--shadow-card-hover);
+  --archive-label-bg: var(--bg-card-tint);
+  --archive-label-color: var(--text-secondary);
+  --archive-label-border: 1px solid var(--border-card);
+  --div-card-bg: var(--bg-card);
+  --div-card-border: 1px solid var(--border-card);
+  --div-card-hover-bg: var(--bg-card);
+  --div-card-hover-border: var(--border-card-hover);
+  --div-card-hover-shadow: var(--shadow-card-hover);
+  --div-tag-bg: var(--bg-card-tint);
+  --div-tag-border: var(--border-card);
+  --div-tag-hover-bg: var(--bg-card-tint);
+  --div-tag-hover-border: var(--border-card-hover);
+  --div-details-border: var(--border-card);
+  --token-keyword: var(--brand-blue);
+  --token-keyword-glow: none;
+  --token-entity: var(--brand-blue);
+  --token-entity-glow: none;
+  --token-variable: var(--text-main);
+  --token-variable-glow: none;
+  --token-string: var(--brand-gold);
+  --token-string-glow: none;
 }
 
 [data-theme='dark'] {
@@ -79,6 +127,53 @@
 
   --footer-bg-end: #0d1117;
   --footer-border: rgba(74, 143, 224, 0.08);
+
+  /* ─── Legacy forwarding aliases — dark overrides ─── */
+  --blur-md: 12px;
+  --blur-lg: 20px;
+  --shadow-primary: 0 4px 16px rgba(74, 143, 224, 0.2);
+  --accent-pink: #F7D060;
+  --accent-orange: #F7D060;
+  --hero-title-bg: linear-gradient(to right, #e8edf5, #8b98b0);
+  --hero-title-shadow: none;
+  --gradient-glass: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+  --event-card-bg: var(--bg-card);
+  --event-card-border: 1px solid var(--border-card);
+  --event-card-shadow: var(--shadow-card);
+  --event-card-hover-shadow: var(--shadow-card-hover);
+  --event-card-hover-border: 1px solid var(--border-card-hover);
+  --event-header-bg: linear-gradient(to right, #e8edf5, #8b98b0);
+  --btn-register-bg: rgba(74, 143, 224, 0.12);
+  --btn-register-color: var(--brand-blue);
+  --btn-register-hover-bg: var(--brand-blue);
+  --btn-register-hover-color: #fff;
+  --btn-outline-border: 1px solid var(--border-card);
+  --btn-outline-hover-bg: var(--bg-card-tint);
+  --archive-card-bg: var(--bg-card);
+  --archive-card-border: var(--border-card);
+  --archive-card-hover-border: var(--border-card-hover);
+  --archive-card-hover-shadow: var(--shadow-card-hover);
+  --archive-label-bg: var(--bg-card-tint);
+  --archive-label-color: var(--text-secondary);
+  --archive-label-border: 1px solid var(--border-card);
+  --div-card-bg: var(--bg-card);
+  --div-card-border: 1px solid var(--border-card);
+  --div-card-hover-bg: var(--bg-card);
+  --div-card-hover-border: var(--border-card-hover);
+  --div-card-hover-shadow: var(--shadow-card-hover);
+  --div-tag-bg: var(--bg-card-tint);
+  --div-tag-border: var(--border-card);
+  --div-tag-hover-bg: var(--bg-card-tint);
+  --div-tag-hover-border: var(--border-card-hover);
+  --div-details-border: var(--border-card);
+  --token-keyword: var(--brand-blue);
+  --token-keyword-glow: none;
+  --token-entity: #5B9EEF;
+  --token-entity-glow: none;
+  --token-variable: var(--text-main);
+  --token-variable-glow: none;
+  --token-string: var(--brand-gold);
+  --token-string-glow: none;
 }
 
 * {
@@ -145,7 +240,7 @@ button {
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #60a5fa, #fbbf24);
+  background: var(--gradient-brand);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
