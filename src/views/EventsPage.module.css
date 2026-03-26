@@ -40,9 +40,18 @@
 
 .eventCardInner {
     display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.eventCardBody {
+    display: flex;
     gap: 2rem;
     padding: 2rem;
-    width: 100%;
 }
 
 .upcomingCard {
@@ -145,6 +154,13 @@
     letter-spacing: 0.5px;
 }
 
+.eventHeader {
+    background: var(--gradient-brand-deep);
+    padding: 1.25rem 1.5rem;
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
 .emptyState {
     color: var(--text-secondary);
     font-style: italic;
@@ -153,9 +169,10 @@
 }
 
 @media (max-width: 768px) {
-    .eventCardInner {
+    .eventCardBody {
         flex-direction: column;
         gap: 1rem;
+        padding: 1rem;
     }
 
     .dateBox {

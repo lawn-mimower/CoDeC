@@ -72,24 +72,9 @@ const EventsPage = () => {
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
                             >
                                 <GlassCard className={styles.eventCardInner} hover={false}>
-                                    <div className={styles.dateBox}>
-                                        <Calendar size={24} />
-                                        <span>{formatDateToDDMMYYYY(event.date)}</span>
-                                        {!event.isAllDay && event.time && (
-                                            <div style={{ fontSize: '0.8em', marginTop: '4px', opacity: 0.8 }}>{event.time}</div>
-                                        )}
-                                        {event.isAllDay && (
-                                            <div style={{ fontSize: '0.7em', marginTop: '4px', opacity: 0.6, textTransform: 'uppercase' }}>All Day</div>
-                                        )}
-                                        {event.recurrence && event.recurrence !== 'none' && (
-                                            <div style={{ marginTop: '8px', color: 'var(--accent-orange)' }} title="Recurring Mission">
-                                                <Repeat size={16} />
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className={styles.content}>
+                                    <div className={styles.eventHeader}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                                            <h3 className={styles.cardTitle}>{event.name}</h3>
+                                            <h3 className={styles.cardTitle} style={{ color: 'white', margin: 0 }}>{event.name}</h3>
                                             {event.isCustom && (
                                                 <button
                                                     onClick={() => handleDelete(event.id)}
@@ -109,25 +94,43 @@ const EventsPage = () => {
                                                 </button>
                                             )}
                                         </div>
-
-                                        <p className={styles.description}>{event.description}</p>
-
-                                        <div className={styles.meta} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '12px' }}>
-                                            {event.venue && <span className={styles.metaTag} style={{ background: 'var(--div-tag-bg)', color: 'var(--text-secondary)', border: '1px solid var(--div-tag-border)', padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>📍 {event.venue}</span>}
-                                            {event.category && (
-                                                <span className={styles.categoryBadge}>
-                                                    {event.category}
-                                                </span>
+                                        {event.category && (
+                                            <span className={styles.categoryBadge} style={{ marginTop: '0.5rem', display: 'inline-block' }}>
+                                                {event.category}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <div className={styles.eventCardBody}>
+                                        <div className={styles.dateBox}>
+                                            <Calendar size={24} />
+                                            <span>{formatDateToDDMMYYYY(event.date)}</span>
+                                            {!event.isAllDay && event.time && (
+                                                <div style={{ fontSize: '0.8em', marginTop: '4px', opacity: 0.8 }}>{event.time}</div>
+                                            )}
+                                            {event.isAllDay && (
+                                                <div style={{ fontSize: '0.7em', marginTop: '4px', opacity: 0.6, textTransform: 'uppercase' }}>All Day</div>
+                                            )}
+                                            {event.recurrence && event.recurrence !== 'none' && (
+                                                <div style={{ marginTop: '8px', color: 'var(--accent-orange)' }} title="Recurring Mission">
+                                                    <Repeat size={16} />
+                                                </div>
                                             )}
                                         </div>
+                                        <div className={styles.content}>
+                                            <p className={styles.description}>{event.description}</p>
 
-                                        <div className={styles.actions}>
-                                            <button
-                                                className={styles.registerBtn}
-                                                onClick={() => { setSelectedEvent(event); setIsModalOpen(true); }}
-                                            >
-                                                Register Now
-                                            </button>
+                                            <div className={styles.meta} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '12px' }}>
+                                                {event.venue && <span className={styles.metaTag} style={{ background: 'var(--div-tag-bg)', color: 'var(--text-secondary)', border: '1px solid var(--div-tag-border)', padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>📍 {event.venue}</span>}
+                                            </div>
+
+                                            <div className={styles.actions}>
+                                                <button
+                                                    className={styles.registerBtn}
+                                                    onClick={() => { setSelectedEvent(event); setIsModalOpen(true); }}
+                                                >
+                                                    Register Now
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </GlassCard>
@@ -151,17 +154,21 @@ const EventsPage = () => {
                             transition={{ duration: 0.5 }}
                         >
                             <GlassCard className={styles.eventCardInner} hover={false}>
-                                <div className={styles.dateBox}>
-                                    <Clock size={24} />
-                                    <span>{formatDateToDDMMYYYY(event.date)}</span>
+                                <div className={styles.eventHeader}>
+                                    <h3 className={styles.cardTitle} style={{ color: 'white', margin: 0 }}>{event.name}</h3>
                                 </div>
-                                <div className={styles.content}>
-                                    <h3 className={styles.cardTitle}>{event.name}</h3>
-                                    <p className={styles.description}>{event.description}</p>
-                                    <div className={styles.actions}>
-                                        <button className={styles.registerBtn} disabled>
-                                            Registration Closed
-                                        </button>
+                                <div className={styles.eventCardBody}>
+                                    <div className={styles.dateBox}>
+                                        <Clock size={24} />
+                                        <span>{formatDateToDDMMYYYY(event.date)}</span>
+                                    </div>
+                                    <div className={styles.content}>
+                                        <p className={styles.description}>{event.description}</p>
+                                        <div className={styles.actions}>
+                                            <button className={styles.registerBtn} disabled>
+                                                Registration Closed
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </GlassCard>
