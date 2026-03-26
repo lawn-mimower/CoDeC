@@ -60,7 +60,7 @@
 .eventName {
   font-family: var(--font-sans);
   font-size: 1.3rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0.35rem;
 }
