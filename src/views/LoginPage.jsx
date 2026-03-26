@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { LogIn, ShieldCheck, Terminal } from 'lucide-react';
+import Link from 'next/link';
 import { createClient } from '../utils/supabase/client';
-import './LoginPage.css';
+import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
+    const [activeTab, setActiveTab] = useState('login');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -43,38 +44,77 @@ const LoginPage = () => {
         }
     };
 
-    const handleForgotPassword = () => {
-        router.push('/forgot-password');
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const { error } = await supabase.auth.signUp({
+                email,
+                password,
+            });
+
+            if (error) {
+                throw error;
+            }
+
+            setError('Check your email to confirm your account.');
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
+    const handleSubmit = activeTab === 'login' ? handleLogin : handleSignup;
+
     return (
-        <div className="login-page">
-            <div className="login-container">
-                <div className="login-header">
-                    <h1 className="glitch-text" data-text="ACCESS_CONTROL">ACCESS_CONTROL</h1>
-                    <p className="status-text">
-                        <Terminal size={14} className="inline-icon" /> System Status: ONLINE
+        <div className={styles.page}>
+            <div className={styles.card}>
+                <div className={styles.header}>
+                    <div className={styles.logo} />
+                    <h1 className={styles.title}>CoDeC</h1>
+                    <p className={styles.subtitle}>
+                        {activeTab === 'login' ? 'Sign in to your account' : 'Create a new account'}
                     </p>
                 </div>
 
-                <form onSubmit={handleLogin} className="login-form glass-panel">
-                    {error && <div className="error-message" style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
+                <div className={styles.tabs}>
+                    <button
+                        type="button"
+                        className={`${styles.tab} ${activeTab === 'login' ? styles.tabActive : ''}`}
+                        onClick={() => { setActiveTab('login'); setError(null); }}
+                    >
+                        Sign In
+                    </button>
+                    <button
+                        type="button"
+                        className={`${styles.tab} ${activeTab === 'signup' ? styles.tabActive : ''}`}
+                        onClick={() => { setActiveTab('signup'); setError(null); }}
+                    >
+                        Create Account
+                    </button>
+                </div>
 
-                    <div className="form-group">
-                        <label htmlFor="email">AGENT_ID // EMAIL</label>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    {error && <div className={styles.error}>{error}</div>}
+
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="email" className={styles.label}>Email</label>
                         <input
                             type="email"
                             id="email"
-                            placeholder="agent@codec.ops"
+                            placeholder="you@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="cyber-input"
+                            className={styles.input}
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="password">SECURITY_KEY // PASSWORD</label>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="password" className={styles.label}>Password</label>
                         <input
                             type="password"
                             id="password"
@@ -82,24 +122,26 @@ const LoginPage = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="cyber-input"
+                            className={styles.input}
                         />
                     </div>
 
-                    <div className="form-actions" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <button type="button" onClick={handleForgotPassword} className="btn-link" style={{ background: 'none', border: 'none', color: '#00ff41', cursor: 'pointer', fontSize: '0.8rem', textDecoration: 'underline' }}>
-                            FORGOT PASSWORD?
-                        </button>
-                    </div>
-
-                    <button type="submit" className={`btn-login ${isLoading ? 'loading' : ''}`} disabled={isLoading}>
-                        {isLoading ? 'AUTHENTICATING...' : 'INITIALIZE_SESSION'}
+                    <button
+                        type="submit"
+                        className={styles.submitBtn}
+                        disabled={isLoading}
+                    >
+                        {isLoading
+                            ? (activeTab === 'login' ? 'Signing in...' : 'Creating account...')
+                            : (activeTab === 'login' ? 'Sign In' : 'Create Account')}
                     </button>
                 </form>
 
-                <div className="login-footer">
-                    <p>UNAUTHORIZED ACCESS IS PROHIBITED</p>
-                </div>
+                {activeTab === 'login' && (
+                    <Link href="/forgot-password" className={styles.link}>
+                        Forgot password?
+                    </Link>
+                )}
             </div>
         </div>
     );
