@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Code2, Sun, Moon, LogIn } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Navbar.module.css';
 
@@ -57,17 +57,13 @@ const Navbar = () => {
         <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <Code2 size={28} className={styles.logoTextPrimary} />
-                    <span>
-                        <span className={styles.logoTextPrimary}>Co</span>
-                        <span className={styles.logoTextSecondary}>DeC</span>
-                    </span>
+                  <div className={styles.logoIcon} />
+                  <span>CoDeC</span>
                 </Link>
 
                 <div className={styles.navActions}>
-                    <Link href="/login" className={styles.loginBtn}>
-                        <LogIn size={18} />
-                        <span className={styles.loginText}>Member Login</span>
+                    <Link href="/connect" className={styles.joinBtn}>
+                      <span className={styles.joinText}>Join CoDeC</span>
                     </Link>
                     <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle Theme">
                         <div className={styles.themeToggleInner}>
