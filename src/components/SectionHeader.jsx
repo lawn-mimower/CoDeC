@@ -2,13 +2,14 @@ import styles from './SectionHeader.module.css';
 
 const SectionHeader = ({ label, heading, gradientWord, subtitle, className = '' }) => {
   const renderHeading = () => {
-    if (!gradientWord) return heading;
-    const parts = heading.split(gradientWord);
+    if (!heading) return null;
+    if (!gradientWord || !heading.includes(gradientWord)) return heading;
+    const idx = heading.indexOf(gradientWord);
     return (
       <>
-        {parts[0]}
+        {heading.slice(0, idx)}
         <span className={styles.gradientWord}>{gradientWord}</span>
-        {parts[1]}
+        {heading.slice(idx + gradientWord.length)}
       </>
     );
   };
