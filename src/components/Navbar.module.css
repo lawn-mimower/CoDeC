@@ -75,6 +75,22 @@
   transform: translateY(-1px);
 }
 
+.memberLoginBtn {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.memberLoginBtn:hover {
+  color: var(--text-main);
+  background: var(--bg-card-tint);
+}
+
 .themeToggle {
   background: transparent;
   border: none;
