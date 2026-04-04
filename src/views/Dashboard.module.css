@@ -13,9 +13,9 @@
 
 .sidebar {
     width: 280px;
-    background: rgba(15, 23, 42, 0.6);
+    background: var(--bg-card-tint);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid var(--border-card);
     border-radius: 16px;
     padding: 2rem;
     display: flex;
@@ -50,7 +50,7 @@
     justify-content: center;
     font-size: 2.5rem;
     font-weight: 700;
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 20px rgba(74, 143, 224, 0.4);
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -64,7 +64,7 @@
     font-weight: 800;
     padding: 2px 6px;
     border-radius: 4px;
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
     text-transform: uppercase;
 }
 
@@ -116,15 +116,15 @@
 }
 
 .activeTab {
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--primary-glow);
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+    border-left: 3px solid var(--brand-blue);
+    color: var(--brand-blue);
+    background: rgba(74, 143, 224, 0.08);
+    border-radius: 0 8px 8px 0;
 }
 
 .content {
     flex: 1;
-    background: rgba(15, 23, 42, 0.3);
+    background: var(--bg-primary);
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     padding: 2rem;
@@ -230,7 +230,7 @@
 
 .input,
 .select {
-    background: rgba(15, 23, 42, 0.8);
+    background: var(--bg-card);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     padding: 0.75rem 1rem;
@@ -242,8 +242,8 @@
 .input:focus,
 .select:focus {
     outline: none;
-    border-color: var(--primary-glow);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 10px rgba(74, 143, 224, 0.2);
 }
 
 .addBtn {
@@ -260,8 +260,8 @@
 }
 
 .addBtn:hover {
-    background: #2563eb;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    background: var(--brand-blue);
+    box-shadow: 0 0 15px rgba(74, 143, 224, 0.4);
 }
 
 /* Utils */
@@ -330,8 +330,8 @@
 .neonInput,
 .neonTextarea,
 .neonSelect {
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    background: var(--bg-card);
+    border: 1px solid rgba(74, 143, 224, 0.2);
     padding: 1rem;
     color: #fff;
     border-radius: 12px;
@@ -344,9 +344,9 @@
 .neonTextarea:focus,
 .neonSelect:focus {
     outline: none;
-    border-color: var(--primary-glow);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-    background: rgba(15, 23, 42, 0.95);
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 15px rgba(74, 143, 224, 0.3);
+    background: var(--bg-card);
 }
 
 .neonTextarea {

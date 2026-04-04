@@ -3,32 +3,6 @@
     max-width: 1400px;
     margin: 0 auto;
     min-height: 100vh;
-    background: var(--bg-primary);
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 5rem;
-    position: relative;
-}
-
-.title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    background: var(--hero-title-bg);
-    filter: var(--hero-title-shadow);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-family: var(--font-mono);
-}
-
-.subtitle {
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
 }
 
 .grid {
@@ -37,30 +11,18 @@
     gap: 2.5rem;
 }
 
-.card {
-    background: var(--div-card-bg);
-    border: var(--div-card-border);
-    border-radius: 20px;
-    padding: 2.5rem;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
+.divCard {
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    background: var(--div-card-hover-bg);
-    border-color: var(--div-card-hover-border);
-    box-shadow: var(--div-card-hover-shadow);
 }
 
 .iconWrapper {
     width: 70px;
     height: 70px;
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(74, 143, 224, 0.1);
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -70,11 +32,11 @@
     transition: all 0.3s ease;
 }
 
-.card:hover .iconWrapper {
-    background: var(--primary-glow);
+.divCard:hover .iconWrapper {
+    background: var(--brand-blue);
     color: white;
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 20px rgba(74, 143, 224, 0.4);
 }
 
 .cardTitle {
@@ -115,19 +77,19 @@
 }
 
 .tag {
-    background: var(--div-tag-bg);
+    background: var(--bg-card-tint);
     color: var(--text-secondary);
     padding: 6px 12px;
     border-radius: 8px;
     font-size: 0.85rem;
     font-family: var(--font-mono);
-    border: 1px solid var(--div-tag-border);
+    border: 1px solid var(--brand-blue);
     transition: all 0.3s ease;
 }
 
-.card:hover .tag {
-    border-color: var(--div-tag-hover-border);
-    background: var(--div-tag-hover-bg);
+.divCard:hover .tag {
+    border-color: var(--brand-blue);
+    background: var(--bg-card-tint);
     color: var(--text-main);
 }
 

@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabaseClient'
+import { createClient } from '@/src/utils/supabase/client'
+
+const supabase = createClient()
 
 export default function AboutPage() {
   const [about, setAbout] = useState(null)

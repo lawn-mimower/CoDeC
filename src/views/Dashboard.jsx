@@ -324,7 +324,9 @@ const EventArchitect = ({ user }) => {
         venue: '',
         category: 'cp',
         description: '',
-        registrationLink: ''
+        registrationLink: '',
+        useGoogleForm: false,
+        googleFormUrl: ''
     });
 
     const handleChange = (e) => {
@@ -343,7 +345,8 @@ const EventArchitect = ({ user }) => {
 
         const eventData = {
             ...formData,
-            created_by: user?.user_id // Use user_id from profile or wait for backend to handle via auth.uid()
+            created_by: user?.user_id, // Use user_id from profile or wait for backend to handle via auth.uid()
+            registration_link: formData.useGoogleForm ? formData.googleFormUrl : null
         };
 
         // Save Event
@@ -495,6 +498,31 @@ const EventArchitect = ({ user }) => {
                         onChange={handleChange}
                     />
                 </div>
+
+                <div className={styles.architectFormGroup}>
+                    <label className={styles.architectLabel}>
+                        <input
+                            type="checkbox"
+                            checked={formData.useGoogleForm}
+                            onChange={e => setFormData(prev => ({ ...prev, useGoogleForm: e.target.checked, googleFormUrl: '' }))}
+                            style={{ marginRight: '0.5rem' }}
+                        />
+                        Use Google Form for registration
+                    </label>
+                </div>
+                {formData.useGoogleForm && (
+                    <div className={styles.architectFormGroup}>
+                        <label className={styles.architectLabel}>Google Form URL</label>
+                        <input
+                            type="url"
+                            className={styles.neonInput}
+                            value={formData.googleFormUrl}
+                            onChange={e => setFormData(prev => ({ ...prev, googleFormUrl: e.target.value }))}
+                            placeholder="https://forms.gle/..."
+                            required={formData.useGoogleForm}
+                        />
+                    </div>
+                )}
 
                 <button
                     type="submit"

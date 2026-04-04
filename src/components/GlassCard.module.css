@@ -1,0 +1,15 @@
+.card {
+  background: var(--bg-card-tint);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.hover:hover {
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}

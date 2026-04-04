@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Calendar, ExternalLink, LogIn, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import EventRegistrationModal from './EventRegistrationModal';
+import EventDetailModal from './EventDetailModal';
 import styles from './UpcomingEvents.module.css';
 
 const UpcomingEvents = ({ events }) => {
@@ -59,12 +59,12 @@ const UpcomingEvents = ({ events }) => {
                         }}
                         className={styles.registerBtn}
                     >
-                        Register
+                        More Info
                     </button>
                 )}
 
                 {isArchive && (
-                    <div className={styles.archiveLabel}>Event Concluded</div>
+                    <div className={styles.archiveLabel}>Concluded</div>
                 )}
             </div>
         </motion.article>
@@ -88,7 +88,7 @@ const UpcomingEvents = ({ events }) => {
                     {upcoming.map((event, index) => renderEventCard(event, index, false))}
                 </div>
             ) : (
-                <div className={styles.emptyState}>No events currently active. Standby.</div>
+                <div className={styles.emptyState}>No upcoming events. Check back soon.</div>
             )}
 
             {/* Mission Archive Section */}
@@ -109,10 +109,10 @@ const UpcomingEvents = ({ events }) => {
                 </>
             )}
 
-            <EventRegistrationModal 
-                isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
-                event={selectedEvent} 
+            <EventDetailModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                event={selectedEvent}
             />
         </section>
     );

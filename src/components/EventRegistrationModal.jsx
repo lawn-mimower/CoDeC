@@ -1,156 +1,88 @@
-import React, { useState } from 'react';
-import { X, Target, CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { createClient } from '../utils/supabase/client';
+// src/components/EventRegistrationModal.jsx
+'use client';
+import React from 'react';
+import { X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './EventRegistrationModal.module.css';
 
 const EventRegistrationModal = ({ isOpen, onClose, event }) => {
-    if (!isOpen || !event) return null;
+  if (!isOpen || !event) return null;
 
-    const [formData, setFormData] = useState({
-        fullName: '',
-        email: '',
-        phone: '',
-        prn: '',
-        branch: '',
-        year: ''
-    });
-    const [isSubmitted, setIsSubmitted] = useState(false);
+  const DEFAULT_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScb962rrOhbEC3waeyzNeCPQ2GaDhjLfoIKGBSk1P2PrHmHvA/viewform?embedded=true";
+  let rawUrl = event.registration_link || event.registrationLink;
+  
+  // Fall back to default if no valid Google form URL is found in the event
+  if (!rawUrl || !/^https:\/\/(docs\.google\.com\/forms\/|forms\.gle\/)/.test(rawUrl)) {
+    rawUrl = DEFAULT_FORM_URL;
+  }
+  
+  let googleFormUrl = rawUrl;
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  // Ensure the link is properly formatted for embedding
+  if (googleFormUrl.includes('viewform') && !googleFormUrl.includes('embedded=true')) {
+      googleFormUrl = googleFormUrl.split('?')[0] + '?embedded=true';
+  }
+  
+  const isGoogleForm = true;
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        const supabase = createClient();
-        
-        try {
-            const { error } = await supabase
-                .from('public_event_registrations')
-                .insert([{
-                    event_id: event.id,
-                    full_name: formData.fullName,
-                    email: formData.email,
-                    phone: formData.phone,
-                    prn: formData.prn,
-                    department: formData.branch,
-                    year_of_study: formData.year
-                }]);
-                
-            if (error) {
-                console.error("Error inserting registration:", error);
-                alert("Failed to register. Please try again.");
-                return;
-            }
-            
-            setIsSubmitted(true);
-            setTimeout(() => {
-                onClose();
-                setIsSubmitted(false);
-                setFormData({
-                    fullName: '',
-                    email: '',
-                    phone: '',
-                    prn: '',
-                    branch: '',
-                    year: ''
-                });
-            }, 3000);
-        } catch (err) {
-            console.error("Unexpected error:", err);
-            alert("An unexpected error occurred.");
-        }
-    };
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className={styles.overlay}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className={styles.modal}
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+              <X size={20} />
+            </button>
 
-    return (
-        <div className={styles.modalOverlay} onClick={onClose}>
-            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <button className={styles.closeBtn} onClick={onClose}>
-                    <X size={24} />
-                </button>
-                
-                {isSubmitted ? (
-                    <motion.div 
-                        className={styles.successState}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, type: 'spring', bounce: 0.5 }}
-                    >
-                        <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 10 }}
-                        >
-                            <CheckCircle2 size={64} className={styles.successIcon} />
-                        </motion.div>
-                        <h3 className={styles.successTitle}>Registration Initialized!</h3>
-                        <p className={styles.successDesc}>Your data stream for {event.name} has been processed. Stand by for further instructions.</p>
-                    </motion.div>
-                ) : (
-                    <>
-                        <div className={styles.modalHeader}>
-                            <h2><Target className={styles.headerIcon} /> Event Sign-Up</h2>
-                            <p className={styles.eventName}>{event.name}</p>
-                        </div>
-
-                        <form className={styles.registrationForm} onSubmit={handleSubmit}>
-                    <div className={styles.inputGroup}>
-                        <label>Full Name</label>
-                        <input type="text" name="fullName" value={formData.fullName} required className={styles.inputField} onChange={handleChange} />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label>College Email</label>
-                        <input type="email" name="email" value={formData.email} required className={styles.inputField} onChange={handleChange} />
-                    </div>
-
-                     <div className={styles.inputGroup}>
-                        <label>Phone Number</label>
-                        <input type="tel" name="phone" value={formData.phone} required className={styles.inputField} onChange={handleChange} />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label>PRN / Student ID</label>
-                        <input type="text" name="prn" value={formData.prn} required className={styles.inputField} onChange={handleChange} />
-                    </div>
-
-                    <div className={styles.formRow}>
-                        <div className={styles.inputGroup}>
-                            <label>Branch / Dept</label>
-                            <select name="branch" value={formData.branch} required className={styles.inputField} onChange={handleChange}>
-                                <option value="" disabled>Select Branch</option>
-                                <option value="CSE">CSE Core</option>
-                                <option value="CSE-SPEC">CSE Specialization (AI/DS/etc)</option>
-                                <option value="ECE">ECE</option>
-                                <option value="MECH">Mechanical</option>
-                                <option value="CIVIL">Civil</option>
-                                <option value="OTHER">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div className={styles.inputGroup}>
-                            <label>Year of Study</label>
-                            <select name="year" value={formData.year} required className={styles.inputField} onChange={handleChange}>
-                                <option value="" disabled>Select Year</option>
-                                <option value="1">1st Year</option>
-                                <option value="2">2nd Year</option>
-                                <option value="3">3rd Year</option>
-                                <option value="4">4th Year</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit" className={styles.submitBtn}>
-                        Confirm Registration
-                    </button>
-                    </form>
-                </>
+            <>
+              <div className={styles.modalHeader}>
+                <span className={styles.eventLabel}>{event.category ?? 'Event'}</span>
+                <h2 className={styles.eventName}>{event.name}</h2>
+                {event.date && (
+                  <p className={styles.eventMeta}>
+                    {new Date(event.date).toLocaleDateString('en-IN', { dateStyle: 'long' })}
+                    {event.venue ? ` · ${event.venue}` : ''}
+                  </p>
                 )}
-            </div>
-        </div>
-    );
+              </div>
+
+              <div className={styles.iframeWrapper}>
+                {isGoogleForm ? (
+                  <iframe
+                    src={googleFormUrl}
+                    width="100%"
+                    height="700"
+                    frameBorder="0"
+                    title="Registration Form"
+                    className={styles.googleFrame}
+                    onLoad={e => e.target.style.opacity = 1}
+                    style={{ opacity: 0, transition: 'opacity 0.3s ease' }}
+                  />
+                ) : (
+                  <p style={{ padding: '2rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                    Registration form unavailable. Please contact the organizers.
+                  </p>
+                )}
+              </div>
+            </>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 };
 
 export default EventRegistrationModal;
