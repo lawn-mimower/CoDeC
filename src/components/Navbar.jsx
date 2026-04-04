@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Sun, Moon, ArrowDown, ArrowUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { createClient } from '../utils/supabase/client';
 import UserMenu from './UserMenu';
@@ -83,30 +83,6 @@ const Navbar = () => {
                     <span>CoDeC</span>
                 </Link>
 
-                <div className={styles.navActions}>
-                    {member ? (
-                        <UserMenu name={member.name} role={member.role} />
-                    ) : (
-                        <>
-                            <Link href="/login" className={styles.memberLoginBtn}>
-                                Member Login
-                            </Link>
-                            <Link href="/connect" className={styles.joinBtn}>
-                                <span className={styles.joinText}>Join CoDeC</span>
-                            </Link>
-                        </>
-                    )}
-                    <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle Theme">
-                        <div className={styles.themeToggleInner}>
-                            <Sun className={`${styles.themeIcon} ${theme === 'light' ? styles.themeIconActive : ''}`} size={24} />
-                            <Moon className={`${styles.themeIcon} ${theme === 'dark' ? styles.themeIconActive : ''}`} size={24} />
-                        </div>
-                    </button>
-                    <div className={styles.menuIcon} onClick={() => setIsOpen(!isOpen)}>
-                        {isOpen ? <X size={28} /> : <Menu size={28} />}
-                    </div>
-                </div>
-
                 <ul className={`${styles.navMenu} ${isOpen ? styles.navMenuActive : ''}`}>
                     {navLinks.map((link) => (
                         <li key={link.path} className={styles.navItem}>
@@ -125,7 +101,72 @@ const Navbar = () => {
                             </Link>
                         </li>
                     ))}
+                    <li className={styles.mobileToggleWrapper}>
+                        <div className={styles.mobileToggleContainer}>
+                            <span style={{marginRight: '1rem', fontFamily: 'var(--font-sans)', fontWeight: '500', color: 'var(--text-secondary)'}}>Theme</span>
+                            <button 
+                                className={styles.themeTrack} 
+                                onClick={toggleTheme} 
+                                aria-label="Toggle Theme"
+                                style={{ 
+                                    justifyContent: theme === 'light' ? 'flex-start' : 'flex-end',
+                                    background: theme === 'light' ? '#0ea5e9' : '#1e1b4b',
+                                    borderColor: theme === 'light' ? '#38bdf8' : '#312e81'
+                                }}
+                            >
+                                <motion.div 
+                                    className={styles.themeThumb}
+                                    layout
+                                    transition={{ type: "spring", stiffness: 700, damping: 30 }}
+                                >
+                                    {theme === 'light' ? (
+                                        <Sun size={12} color="#0ea5e9" strokeWidth={3} />
+                                    ) : (
+                                        <Moon size={12} color="#1e1b4b" strokeWidth={3} />
+                                    )}
+                                </motion.div>
+                            </button>
+                        </div>
+                    </li>
                 </ul>
+
+                <div className={styles.mobileMenuContainer}>
+                    <div className={styles.menuIcon} onClick={() => setIsOpen(!isOpen)}>
+                        {isOpen ? <ArrowUp size={28} /> : <ArrowDown size={28} />}
+                    </div>
+                </div>
+
+                <div className={styles.navActions}>
+                    <button 
+                        className={`${styles.themeTrack} ${styles.desktopToggle}`} 
+                        onClick={toggleTheme} 
+                        aria-label="Toggle Theme"
+                        style={{ 
+                            justifyContent: theme === 'light' ? 'flex-start' : 'flex-end',
+                            background: theme === 'light' ? '#0ea5e9' : '#1e1b4b',
+                            borderColor: theme === 'light' ? '#38bdf8' : '#312e81'
+                        }}
+                    >
+                        <motion.div 
+                            className={styles.themeThumb}
+                            layout
+                            transition={{ type: "spring", stiffness: 700, damping: 30 }}
+                        >
+                            {theme === 'light' ? (
+                                <Sun size={12} color="#0ea5e9" strokeWidth={3} />
+                            ) : (
+                                <Moon size={12} color="#1e1b4b" strokeWidth={3} />
+                            )}
+                        </motion.div>
+                    </button>
+                    {member ? (
+                        <UserMenu name={member.name} role={member.role} />
+                    ) : (
+                        <Link href="/login" className={styles.memberLoginBtn}>
+                            Member Login
+                        </Link>
+                    )}
+                </div>
             </div>
         </nav>
     );

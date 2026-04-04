@@ -91,47 +91,39 @@
   background: var(--bg-card-tint);
 }
 
-.themeToggle {
-  background: transparent;
-  border: none;
+.themeTrack {
+  width: 50px;
+  height: 26px;
+  border-radius: 99px;
+  border: 1px solid var(--border-card);
   cursor: pointer;
-  color: var(--nav-icon-color);
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.4rem;
+  padding: 0 4px;
+  transition: background 0.4s ease, border-color 0.4s ease;
+  flex-shrink: 0;
+}
+
+.themeThumb {
+  width: 18px;
+  height: 18px;
+  background: white;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
-}
-
-.themeToggle:hover {
-  background: var(--bg-card-tint);
-}
-
-.themeToggleInner {
-  position: relative;
-  width: 20px;
-  height: 20px;
-}
-
-.themeIcon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-  opacity: 0;
-  transform: rotate(-90deg) scale(0);
-}
-
-.themeIconActive {
-  opacity: 1;
-  transform: rotate(0) scale(1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 2;
 }
 
 .menuIcon {
   display: none;
   cursor: pointer;
   color: var(--nav-icon-color);
+}
+
+.mobileMenuContainer {
+  display: none;
 }
 
 .navMenu {
@@ -171,6 +163,10 @@
   background: rgba(74, 143, 224, 0.1);
 }
 
+.mobileToggleWrapper {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .navbar {
     top: 0;
@@ -192,6 +188,13 @@
     display: block;
   }
 
+  .mobileMenuContainer {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
   .navMenu {
     position: fixed;
     top: 70px;
@@ -209,5 +212,29 @@
 
   .navMenuActive {
     transform: translateX(0%);
+  }
+
+  .desktopToggle {
+    display: none !important;
+  }
+
+  .mobileToggleWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-card);
+    width: 80%;
+  }
+
+  .mobileToggleContainer {
+    background: var(--bg-card-tint);
+    border: 1px solid var(--border-card);
+    padding: 0.6rem 1.5rem;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 }
